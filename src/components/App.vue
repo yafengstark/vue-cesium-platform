@@ -13,15 +13,18 @@
 
         <Menu theme="dark" class="app-nav">
             <Submenu name="0">
+
                 <template slot="title">
-                    数字地球平台
+                    <router-link  tag="span" to="/">
+                        数字地球平台
+                    </router-link>
                 </template>
             </Submenu>
             <Submenu name="1">
 
                 <template slot="title">
                     <Icon type="ios-paper"/>
-                    <router-link to="/layer">
+                    <router-link tag="span" to="/layer">
                         图层
                     </router-link>
                 </template>
@@ -30,25 +33,25 @@
             <Submenu name="2">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    视角工具
+                    视角
                 </template>
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    量测工具
+                    量测
                 </template>
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    地形工具
+                    地形
                 </template>
             </Submenu>
             <Submenu name="4">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    三维工具
+                    三维
                 </template>
             </Submenu>
             <Submenu name="5">
@@ -73,7 +76,7 @@
 
 
         <!-- 路由的容器 -->
-        <transition>
+        <transition class="app-view" >
             <router-view></router-view>
         </transition>
 
@@ -152,15 +155,30 @@
         padding: 0px;
         // 当有组件切换动效的时候，一瞬间，页面的宽度会变成 正常宽度的 2 倍，此时，需要隐藏超出屏幕宽度的区域
         overflow: hidden;
+
         .ivu-menu-vertical .ivu-menu-submenu-title-icon {
 
-            display: none;
-
+            opacity: 0;
         }
         .app-nav {
-            width: 250px ! important;
+
+
+            width: 200px ! important;
+            max-width: 200px;
+            min-width: 200px;
+
+        }
+        .app-view {
+
         }
 
+        a {
+            text-decoration: none;
+        }
+
+        .router-link-active {
+            text-decoration: none;
+        }
     }
 
     // 动画效果相关的类样式

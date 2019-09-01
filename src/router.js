@@ -7,7 +7,7 @@ import LayerContainer from './components/tabbar/LayerContainer.vue'
 // 创建路由对象
 const router = new VueRouter({
   routes: [
-      // { path: '/', redirect: '/' },
+      { path: '/'},
       { path: '/layer', component: LayerContainer },
 
   ],

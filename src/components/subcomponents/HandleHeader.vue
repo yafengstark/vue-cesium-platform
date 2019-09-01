@@ -1,8 +1,8 @@
 <template>
-    <div class="header-container" :class="[ !isClose ? 'exist' : 'not-exist' ]">
+    <div class="header-container">
         <div class="layer-header">
             <span class="title">&nbsp;&nbsp;{{ title }}</span>
-            <span><Button type="text" @click="isClose = !isClose"><Icon type="ios-close" /></Button></span>
+            <span><Button type="text" @click="close"><Icon type="ios-close" /></Button></span>
         </div>
         <hr>
     </div>
@@ -16,12 +16,20 @@
     export default {
         data() {
             return {
-                 isClose : false
+
             };
         },
         props: ["title"],
         methods: {
+            close(){
+                // 点击了关闭
+                this.$store.commit("setIsHandleShow", false);
+                //
+                this.$router.push("/");
 
+            }
+        },
+        computed: {
         }
     };
 </script>
@@ -44,13 +52,7 @@
         }
 
     }
-    .exist {
 
-    }
-    .not-exist {
-        width: 0px;
-        display: none;
-    }
 
 
 </style>

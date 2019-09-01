@@ -2,7 +2,7 @@
     <!-- Cesium容器 -->
     <div class="viewer">
         <!--<cesium-viewer @ready="ready" ref="cesium"> </cesium-viewer>-->
-         地球容器（正式版注释掉）
+         地球容器（开发阶段一注释掉）
     </div>
 
 

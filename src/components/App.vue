@@ -33,43 +33,61 @@
             <Submenu name="2">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    视角
+                    <router-link  tag="span" to="/view">
+                        视角
+                    </router-link>
                 </template>
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    量测
+                    <router-link  tag="span" to="/meature">
+                        量测
+                    </router-link>
+
                 </template>
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    地形
+                    <router-link  tag="span" to="/terrain">
+                        地形
+                    </router-link>
+
                 </template>
             </Submenu>
             <Submenu name="4">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    三维
+
+                    <router-link  tag="span" to="/model">
+                        三维
+                    </router-link>
                 </template>
             </Submenu>
             <Submenu name="5">
                 <template slot="title">
                     <Icon type="ios-stats"/>
-                    标注
+                    <router-link  tag="span" to="/mark">
+                        标注
+                    </router-link>
+
                 </template>
             </Submenu>
             <Submenu name="6">
                 <template slot="title">
                     <Icon type="ios-stats"/>
-                    数据
+                    <router-link  tag="span" to="/data">
+                        数据
+                    </router-link>
                 </template>
             </Submenu>
             <Submenu name="7">
                 <template slot="title">
                     <Icon type="ios-stats"/>
-                    设置
+                    <router-link  tag="span" to="/setting">
+                        设置
+                    </router-link>
                 </template>
             </Submenu>
         </Menu>

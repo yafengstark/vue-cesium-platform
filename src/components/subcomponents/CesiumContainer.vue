@@ -10,9 +10,7 @@
     </template>
 
     <script>
-        // 导入自己封装的子组件
-        import LayerContainer from '../tabbar/LayerContainer.vue'
-
+        
         export default {
             data() {
                 return {};
@@ -36,19 +34,19 @@
     //                cesium.viewer.imageryProvider = Cesium.createTileMapServiceImageryProvider({
     //                    url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
     //                })
+					//vue-cesuim已经包含了该功能，不需要
+                    //cesium.viewer = new Cesium.Viewer('cesiumContainer', {
+                    //    imageryProvider: Cesium.createTileMapServiceImageryProvider({
+                    //        url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
 
-                    cesium.viewer = new Cesium.Viewer('cesiumContainer', {
-                        imageryProvider: Cesium.createTileMapServiceImageryProvider({
-                            url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-
-                        }),
+                     //   }),
     //                    baseLayerPicker: false
-                    });
+                    //});
                 }
             },
             components: {
                 // 注册子组件
-                LayerContainer
+                
             }
         };
     </script>

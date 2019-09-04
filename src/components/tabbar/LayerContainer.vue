@@ -4,7 +4,7 @@
         <handle-header title="图层"></handle-header>
 
         <!-- 树型组件 -->
-        <Tree :data="data2" show-checkbox disabled></Tree>
+        <Tree :data="data2" @on-check-change="checkchange" show-checkbox disabled></Tree>
 
         <!--<Row class="layer-header">-->
         <!---->
@@ -63,7 +63,12 @@
                     {
                         title: '叠加图层',
                         expand: false,
-                        children: []
+                        children: [],
+						//如何添加节点事件呢???
+						on:{
+							"on-check-change":data=>{alert('ok');}
+						}
+						
                     },
                     {
                         title: '标注图层',
@@ -84,7 +89,14 @@
                 // 获取轮播图的方法
                 const {data} = await this.$http.get("/getlunbo");
                 if (data.status === 200) this.lunbotu = data.result;
-            }
+            },
+			checkchange:function(sels,cursel){
+                debugger;
+                if (cursel.title == '标注图层' && cursel.checked) {
+                    //如何获取cesuim对象呢
+                }
+				alert('OK');
+			}
         },
         components: {
             // 注册子组件

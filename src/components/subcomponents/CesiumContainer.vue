@@ -1,62 +1,62 @@
 <template>
     <!-- Cesium容器 -->
     <div class="viewer">
-        <!--<cesium-viewer @ready="ready" ref="cesium"> </cesium-viewer>-->
-         地球容器（开发阶段一注释掉）
+        <cesium-viewer @ready="ready" ref="cesium"> </cesium-viewer>
+        <!--地球容器（开发阶段一注释掉）-->
     </div>
 
 
 
-</template>
+    </template>
 
-<script>
-    // 导入自己封装的子组件
+    <script>
+        // 导入自己封装的子组件
+        import LayerContainer from '../tabbar/LayerContainer.vue'
 
+        export default {
+            data() {
+                return {};
+            },
+            created() {
 
-    export default {
-        data() {
-            return {};
-        },
-        created() {
+            },
+            methods: {
+                ready (param) {
+                    //                console.log(this);
+                    console.log('cesium'); debugger;
+                    console.log(this.$refs.cesium)
+                    console.log(this.$refs.cesium.Cesium.version)
+    //
+                    var cesium = this.$refs.cesium;
+                    var camera = this.$refs.cesium.camera;
+                    console.log(camera);
+                    camera.position.longitude = 116.46;
+                    camera.position.latitude = 39.92;
+                    camera.position.height = 10000000
+    //                cesium.viewer.imageryProvider = Cesium.createTileMapServiceImageryProvider({
+    //                    url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+    //                })
 
-        },
-        methods: {
-            ready (param) {
-//                console.log(this);
-                console.log('cesium');
-                console.log(this.$refs.cesium)
-                console.log(this.$refs.cesium.Cesium.version)
-//
-                var cesium = this.$refs.cesium;
-                var camera = this.$refs.cesium.camera;
-                console.log(camera);
-                camera.position.longitude = 116.46;
-                camera.position.latitude = 39.92;
-                camera.position.height = 10000000
-//                cesium.viewer.imageryProvider = Cesium.createTileMapServiceImageryProvider({
-//                    url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-//                })
+                    cesium.viewer = new Cesium.Viewer('cesiumContainer', {
+                        imageryProvider: Cesium.createTileMapServiceImageryProvider({
+                            url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
 
-                cesium.viewer = new Cesium.Viewer('cesiumContainer', {
-                    imageryProvider: Cesium.createTileMapServiceImageryProvider({
-                        url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-
-                    }),
-//                    baseLayerPicker: false
-                });
+                        }),
+    //                    baseLayerPicker: false
+                    });
+                }
+            },
+            components: {
+                // 注册子组件
+                LayerContainer
             }
-        },
-        components: {
-            // 注册子组件
+        };
+    </script>
 
+    <style lang="scss" scoped>
+
+        .viewer {
+            width: 100%;
+            height: 100%;
         }
-    };
-</script>
-
-<style lang="scss" scoped>
-
-    .viewer {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+    </style>

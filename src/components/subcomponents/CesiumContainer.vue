@@ -21,6 +21,10 @@
             methods: {
                 ready (param) {
                     //                console.log(this);
+					//获取Vue-Cesuim传过来的对象
+					//param.Cesium; 
+					//param.viewer;
+					window.g_viewer = param.viewer;
                     console.log('cesium'); debugger;
                     console.log(this.$refs.cesium)
                     console.log(this.$refs.cesium.Cesium.version)

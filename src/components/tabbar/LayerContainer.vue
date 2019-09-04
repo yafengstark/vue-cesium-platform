@@ -94,8 +94,16 @@
                 debugger;
                 if (cursel.title == '标注图层' && cursel.checked) {
                     //如何获取cesuim对象呢
+					//g_viewer.camera.position.longitude = 117.46;
+					
+					//g_viewer.camera.moveBackward(100);
+					
+					
+					g_viewer.camera.flyTo({
+        destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000.0)
+    });
                 }
-				alert('OK');
+				//alert('OK');
 			}
         },
         components: {

@@ -99,19 +99,19 @@
 					
 					Cesium.GeoJsonDataSource.load(url).then(function(dataSource){
 						var entities = dataSource.entities.values; 
-						debugger;
+						//debugger;
 						for (var i = 0; i < entities.length; i++) { 
 							var entity = entities[i]; 
 							var abc = entity.position.getValue(); 
-							
+							//window.temp = abc;
 							var font_size = [16,14,12,10,8,6,4,2,1];
-							var dist_con_ar = [ new Cesium.DistanceDisplayCondition(0, 1000),
-								new Cesium.DistanceDisplayCondition(1000, 3000),
-								new Cesium.DistanceDisplayCondition(3000, 5000),
-								new Cesium.DistanceDisplayCondition(5000, 6000),
-								new Cesium.DistanceDisplayCondition(6000, 9000),
-								new Cesium.DistanceDisplayCondition(9000, 13000),
-								new Cesium.DistanceDisplayCondition(13000, Number.Max)
+							var dist_con_ar = [ new Cesium.DistanceDisplayCondition(0, 40000000),
+								new Cesium.DistanceDisplayCondition(0, 9000000),
+								new Cesium.DistanceDisplayCondition(0, 7000000),
+								new Cesium.DistanceDisplayCondition(0, 6000000),
+								new Cesium.DistanceDisplayCondition(0, 5000000),
+								new Cesium.DistanceDisplayCondition(0, 4000000),
+								new Cesium.DistanceDisplayCondition(0, 3000000)
 							];
 							
 							// 2. Now, push each entity that's a label to our 'labels' array
@@ -120,13 +120,13 @@
 								label: { 
 									text: entity.properties.CITY_NAME, 
 									font: font_size[ entity.properties.POP_RANK - 1] + 'px Helvetica', 
-									distanceDisplayCondition:dist_con_ar[ 7 - entity.properties.POP_RANK],
+									distanceDisplayCondition:dist_con_ar[  entity.properties.POP_RANK - 1],
 									fillColor: Cesium.Color.WHITE, 
 									outlineColor: Cesium.Color.BLACK, 
 									outlineWidth: 5, 
 									//pixelOffset : new Cartesian3(50.0, -50.0), 
-									style: Cesium.LabelStyle.FILL_AND_OUTLINE, 
-									translucencyByDistance: new Cesium.NearFarScalar(2.5e6, 1.0, 2.5e7, 0.0) 
+									style: Cesium.LabelStyle.FILL_AND_OUTLINE
+									//translucencyByDistance: new Cesium.NearFarScalar(2.5e6, 1.0, 2.5e7, 0.0) 
 								} 
 							});
 						}											

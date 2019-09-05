@@ -32,7 +32,12 @@
                     console.log(camera);
                     camera.position.longitude = 116.46;
                     camera.position.latitude = 39.92;
-                    camera.position.height = 10000000
+                    camera.position.height = 10000000;
+					
+					//camera.changed.addEventListener(function (percentage) {
+						//转动之后的触发事件
+					//	console.log(camera.position);
+					//});
     //                cesium.viewer.imageryProvider = Cesium.createTileMapServiceImageryProvider({
     //                    url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
     //                })

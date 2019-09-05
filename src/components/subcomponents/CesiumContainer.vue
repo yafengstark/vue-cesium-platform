@@ -25,10 +25,8 @@
 					//param.Cesium; 
 					//param.viewer;
 					window.g_viewer = param.viewer;
-                    console.log('cesium'); debugger;
-                    console.log(this.$refs.cesium)
-                    console.log(this.$refs.cesium.Cesium.version)
-    //
+                    console.log('cesium'); //debugger;
+                    
                     var cesium = this.$refs.cesium;
                     var camera = this.$refs.cesium.camera;
                     console.log(camera);

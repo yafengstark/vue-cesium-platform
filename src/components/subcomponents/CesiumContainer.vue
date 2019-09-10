@@ -1,8 +1,14 @@
 <template>
     <!-- Cesium容器 参见https://zouyaoji.top/vue-cesium/#/zh/start/usage -->
     <div class="viewer">
-        <cesium-viewer @ready="ready" @changed="changed" :animation="animation" :camera="camera" > </cesium-viewer>
-        <!--地球容器（开发阶段一注释掉）-->
+	
+		<!--地球容器（开发阶段一注释掉）-->
+        <cesium-viewer @ready="ready" @changed="changed" :animation="animation" :camera="camera" >
+			<cesium-navigation></cesium-navigation>
+		</cesium-viewer>
+        
+		
+		
     </div>
 
 
@@ -18,13 +24,13 @@
 				  position: {
 					longitude: 104.06,
 					latitude: 30.67,
-					height: 2000
+					height: 11560000
 				  },
 				  heading: 360,
 				  pitch: -90,
 				  roll: 0
 				},
-				animation: false
+				animation: true
 			  }
 			},
             created() {
@@ -37,36 +43,51 @@
 					//param.Cesium; 
 					//param.viewer;
 					
-					debugger;
+					
 					const { Cesium, viewer } = cesiumInstance;
 					
 					window.g_viewer = viewer;
                     console.log('cesium'); //debugger;
 					
 					// 在这儿获取Cesium和viewer实例，再执行相关逻辑代码
-					this.camera.position.longitude = 116.46;
-					this.camera.position.latitude = 39.92;
-					this.camera.position.height = 50000;
+					//this.camera.position.longitude = 116.46;
+					//this.camera.position.latitude = 39.92;
+					//this.camera.position.height = 50000;
 					this.animation = false;
 					
-					//this.camera.changed.addEventListener(function(percentage){
-					//	console.log(percentage);
-					//});
-                    
-                    
-					//vue-cesuim已经包含了该功能，不需要
-                    //cesium.viewer = new Cesium.Viewer('cesiumContainer', {
-                    //    imageryProvider: Cesium.createTileMapServiceImageryProvider({
-                    //        url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-
-                     //   }),
-    //                    baseLayerPicker: false
-                    //});
+					this.$store.dispatch('setCesiumInstance',cesiumInstance);
+					
+					
                 },
-				changed(a,b,c){
+				changed(percentage){
 					//debugger;
 					
-					console.log(this.camera.position.height);
+					console.log(g_viewer.camera.position.z);
+					
+					//这个椭球形就是地球了
+					var ellipsoid = g_viewer.scene.globe.ellipsoid;
+					
+					// 镜头移动的速率基于镜头离地球的高度
+					var cameraHeight = ellipsoid.cartesianToCartographic(g_viewer.camera.position).height;
+					
+					var labels = this.$store.getters.labels;
+					var label ;
+					for(var i = 0; i < labels.length; i++){
+						label = labels.get(i);
+						//debugger;
+						if(label.POPRANK.getValue() == 1 && label.show){
+							label.show = false;
+							console.log(label.text);
+						}
+					}
+					/* if(cameraHeight > 10000000){
+						for(var i = 0 ; i < labels.length; i++){
+							labels.get
+						}
+					} */
+					
+					console.log(cameraHeight);
+
 				}
             },
             components: {

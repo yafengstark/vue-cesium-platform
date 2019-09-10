@@ -91,31 +91,57 @@
                 if (data.status === 200) this.lunbotu = data.result;
             },
 			checkchange:function(sels,cursel){
-                debugger;
+                
                 if (cursel.title == '标注图层' && cursel.checked) {
-                    
-					var viewer = g_viewer;
-					var url = 'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/World_Cities/FeatureServer/0/query?where=1+%3D+1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=4326&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token=';
+                    //debugger;
+					var viewer = this.$store.getters.cesuimInstace.viewer;
+					
+					var labels = this.$store.getters.labels;
+					
+					var font_size = [16,14,12,10,8,6,4,2,1];
+					var dist_con_ar = [ new Cesium.DistanceDisplayCondition(0, 1000),
+						new Cesium.DistanceDisplayCondition(1000, 3000),
+						new Cesium.DistanceDisplayCondition(3000, 5000),
+						new Cesium.DistanceDisplayCondition(5000, 6000),
+						new Cesium.DistanceDisplayCondition(6000, 9000),
+						new Cesium.DistanceDisplayCondition(9000, 13000),
+						new Cesium.DistanceDisplayCondition(13000, Number.Max)
+					];
+					
+					//如果已经加载则不请求
+					if(labels.length > 0 ){
+						return;
+					}
+					
+					
+					var url = 'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/World_Cities/FeatureServer/0/query?where=POP_RANK+%3D+1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=4326&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token=';
 					
 					Cesium.GeoJsonDataSource.load(url).then(function(dataSource){
 						var entities = dataSource.entities.values; 
-						debugger;
+						
+						console.log('加载了datasource数据');
+							
 						for (var i = 0; i < entities.length; i++) { 
 							var entity = entities[i]; 
 							var abc = entity.position.getValue(); 
 							
-							var font_size = [16,14,12,10,8,6,4,2,1];
-							var dist_con_ar = [ new Cesium.DistanceDisplayCondition(0, 1000),
-								new Cesium.DistanceDisplayCondition(1000, 3000),
-								new Cesium.DistanceDisplayCondition(3000, 5000),
-								new Cesium.DistanceDisplayCondition(5000, 6000),
-								new Cesium.DistanceDisplayCondition(6000, 9000),
-								new Cesium.DistanceDisplayCondition(9000, 13000),
-								new Cesium.DistanceDisplayCondition(13000, Number.Max)
-							];
+							
+							/* labels.add({
+								position: new Cesium.Cartesian3(abc.x,abc.y,abc.z), 
+								text: entity.properties.CITY_NAME, 
+								font: font_size[ entity.properties.POP_RANK - 1] + 'px Helvetica', 
+								distanceDisplayCondition:dist_con_ar[ 7 - entity.properties.POP_RANK],
+								fillColor: Cesium.Color.WHITE, 
+								outlineColor: Cesium.Color.BLACK, 
+								outlineWidth: 5, 
+								//pixelOffset : new Cartesian3(50.0, -50.0), 
+								style: Cesium.LabelStyle.FILL_AND_OUTLINE, 
+								translucencyByDistance: new Cesium.NearFarScalar(2.5e6, 1.0, 2.5e7, 0.0)
+							}); */
 							
 							// 2. Now, push each entity that's a label to our 'labels' array
-							viewer.entities.add({ 
+							var label = viewer.entities.add({
+								parent:labels,
 								position: new Cesium.Cartesian3(abc.x,abc.y,abc.z), 
 								label: { 
 									text: entity.properties.CITY_NAME, 
@@ -124,16 +150,23 @@
 									fillColor: Cesium.Color.WHITE, 
 									outlineColor: Cesium.Color.BLACK, 
 									outlineWidth: 5, 
+									
 									//pixelOffset : new Cartesian3(50.0, -50.0), 
 									style: Cesium.LabelStyle.FILL_AND_OUTLINE, 
-									translucencyByDistance: new Cesium.NearFarScalar(2.5e6, 1.0, 2.5e7, 0.0) 
+									//translucencyByDistance: new Cesium.NearFarScalar(2.5e6, 1.0, 2.5e7, 0.0) 
 								} 
 							});
+							//label.addProperty('POPRANK');
+							label.POPRANK  = entity.properties.POP_RANK;
+							//labels.add(label).POPRANK  = entity.properties.POP_RANK;
+							
 						}											
 					});
 					
 					//g_viewer.dataSources.add(dataSource);
 					//g_viewer.zoomTo(dataSource);
+				}else{
+					//labels.hide();
 				}
 			}
         },

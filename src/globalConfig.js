@@ -14,7 +14,7 @@ import Vue from 'vue'
 // import '../lib/mui/css/icons-extra.css'
 //
 // 直接导入并执行 filters.js 模块，从而为Vue挂载全局的过滤器
-import './filters.js'
+import './filters/filters.js'
 
 
 // 安装 图片预览的插件

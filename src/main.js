@@ -12,7 +12,7 @@ import './globalConfig.js'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 // 导入路由对象
-import router from './router.js'
+import router from './router/router.js'
 
 // iView
 import iView from 'iview';
@@ -24,13 +24,13 @@ import VueCesium from 'vue-cesium'
 Vue.use(VueCesium, {
     // cesiumPath 是指引用的Cesium.js路径，如
     // 项目本地的Cesium Build包，vue项目需要将Cesium Build包放static目录：
-    cesiumPath: '../lib/Cesium/Cesium.js'
+    // cesiumPath: '../lib/Cesium/Cesium.js'
     // 个人在线Cesium Build包：
     // cesiumPath: 'https://zouyaoji.top/vue-cesium/statics/Cesium/Cesium.js'
     // 个人在线SuperMap Cesium Build包（在官方基础上二次开发出来的）：
     // cesiumPath: 'https://zouyaoji.top/vue-cesium/statics/SuperMapCesium/Cesium.js'
     // 官方在线Cesium Build包，有CDN加速，推荐用这个：
-    // cesiumPath: 'https://unpkg.com/cesium/Build/Cesium/Cesium.js'
+    cesiumPath: 'https://unpkg.com/cesium/Build/Cesium/Cesium.js'
 })
 
 // 注册全局的组件
@@ -39,7 +39,8 @@ Vue.use(VueCesium, {
 // Vue.component('mytest', testcom)
 
 // 导入状态管理对象
-import store from './store.js'
+// 导入状态管理对象
+import store from './store/index.js'
 
 // 导入 根组件
 import App from './components/App.vue'

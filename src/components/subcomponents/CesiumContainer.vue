@@ -1,17 +1,13 @@
 <template>
     <!-- Cesium容器 -->
     <div class="viewer">
-        <!--<cesium-viewer @ready="ready" ref="cesium"> </cesium-viewer>-->
-         地球容器（开发阶段一注释掉）
+        <cesium-viewer @ready="ready" ref="cesium"> </cesium-viewer>
     </div>
-
-
 
 </template>
 
 <script>
     // 导入自己封装的子组件
-
 
     export default {
         data() {
@@ -37,13 +33,13 @@
 //                    url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
 //                })
 
-                cesium.viewer = new Cesium.Viewer('cesiumContainer', {
-                    imageryProvider: Cesium.createTileMapServiceImageryProvider({
-                        url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-
-                    }),
-//                    baseLayerPicker: false
-                });
+//                cesium.viewer = new Cesium.Viewer('cesiumContainer', {
+//                    imageryProvider: Cesium.createTileMapServiceImageryProvider({
+//                        url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+//
+//                    }),
+////                    baseLayerPicker: false
+//                });
             }
         },
         components: {

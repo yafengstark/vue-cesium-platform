@@ -97,8 +97,10 @@
 <style lang="scss" scoped>
     .layer {
         background-color: #f6f6f6;
+
         border-width: 0.001px;
         border-color: #e2e2e2;
+
         /*border: solid;*/
     }
 

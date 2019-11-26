@@ -1,16 +1,10 @@
 <template>
     <div class="layer" :class="[ message ? 'exist' : 'not-exist' ]">
         <!--  头部区域 -->
-        <handle-header title="图层"></handle-header>
 
         <!-- 树型组件 -->
         <Tree :data="data2" show-checkbox disabled></Tree>
 
-        <!--<Row class="layer-header">-->
-        <!---->
-        <!--<Col span="12"> <h1>图层管理</h1></Col>-->
-        <!--<Col span="12"><Button type="text">X</Button></Col>-->
-        <!--</Row>-->
 
 
     </div>

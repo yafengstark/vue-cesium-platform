@@ -1,0 +1,130 @@
+<!-- model 模型 -->
+<template>
+    <div class="container">
+
+        <div class="functions">
+            <load-billboards></load-billboards>
+        </div>
+        <div class="functions">
+            <load-box></load-box>
+
+        </div>
+        <div class="functions">
+            <load-dynamic-line></load-dynamic-line>
+
+        </div>
+        <div class="functions">
+            <!--缩放-->
+            <Icon type="md-add" size="24"/>放大
+            <br>
+            <Icon type="md-remove" size="24"/>缩小
+        </div >
+        <div class="functions">
+            <Icon type="ios-expand" size="36"/>
+            <br>
+            全幅
+        </div>
+        <div class="functions">
+            <Icon type="ios-eye" size="36"/>
+            <br>
+            鹰眼图
+        </div>
+        <div class="functions">
+            <Icon type="ios-locate" size="36"/>
+            <br>
+            自动定位
+        </div>
+        <div class="functions">
+
+            <!--<fast-locate></fast-locate>-->
+        </div>
+        <div class="functions">
+            <Icon type="ios-calculator" size="36"/>
+            <br>
+            地图量算
+        </div>
+        <div class="functions">
+            <!--图层-->
+            <div @click="tabPaneShowState.isLayerControlShow = !tabPaneShowState.isLayerControlShow ">
+                <Icon type="md-albums" size="24" /> 图层控制
+            </div>
+            <div>
+                <Icon type="md-add" size="24"/>
+                添加图层
+            </div>
+        </div>
+
+
+
+
+    </div>
+</template>
+
+<script>
+    // 导入自己封装的轮播图子组件
+    import {mapActions, mapState} from 'vuex'
+
+    import LoadBillboards from '../subcomponents/LoadBillboards.vue'
+    import LoadBox from '../subcomponents/LoadBox.vue'
+    import LoadDynamicLine from '../subcomponents/LoadDynamicLine.vue'
+    export default {
+        data() {
+            return {};
+        },
+        computed: {
+            ...mapState(['tabPaneShowState']),
+
+        },
+        created() {
+            // 选择显示
+
+        },
+        methods: {
+            async getlunbotu() {
+                // 获取轮播图的方法
+                const {data} = await this.$http.get("/getlunbo");
+                if (data.status === 200) this.lunbotu = data.result;
+            }
+        },
+        components: {
+            // 注册子组件
+            LoadBillboards,
+            LoadBox,
+            LoadDynamicLine
+
+        }
+    };
+</script>
+
+<style lang="scss" scoped>
+    .layer {
+        background-color: #f6f6f6;
+
+        border-width: 0.001px;
+        border-color: #e2e2e2;
+
+        /*border: solid;*/
+    }
+
+    .container{
+        display: flex;
+        height: 78px;
+        .functions {
+            margin-left:3px;
+            /*border-style:solid;*/
+            border-width:1px;
+            /*font-size: 20px;*/
+            text-align: center;
+        }
+
+    }
+    .exist {
+
+    }
+
+    .not-exist {
+        display: none;
+    }
+
+
+</style>

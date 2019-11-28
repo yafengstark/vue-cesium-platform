@@ -5,7 +5,7 @@
         <div class="functions">
             <Icon type="md-arrow-up" size="36"/>
             <br>
-            选择
+            加载模型
         </div>
         <div class="functions">
             <Icon type="ios-hand" size="36"/>

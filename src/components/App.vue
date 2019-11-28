@@ -3,22 +3,21 @@
 
 
         <div class="menu">
-            <Menu mode="horizontal" class="app-menu" >
+            <Menu mode="horizontal" class="app-menu">
                 <!--<MenuItem name="0">-->
 
-                    <!--<router-link tag="span" to="/">-->
-                        <!--<Icon type="ios-paper"/>-->
-                        <!--数字地球平台-->
-                    <!--</router-link>-->
+                <!--<router-link tag="span" to="/">-->
+                <!--<Icon type="ios-paper"/>-->
+                <!--数字地球平台-->
+                <!--</router-link>-->
                 <!--</MenuItem>-->
 
                 <MenuItem name="1">
 
 
-
                     <router-link tag="span" to="/start">
-                        <Icon type="ios-paper"/>
-                        开始
+                        <Icon type="ios-map" />
+                        地图
                     </router-link>
 
 
@@ -26,9 +25,9 @@
                 <MenuItem name="2">
 
 
-                    <router-link tag="span" to="/view">
+                    <router-link tag="span" to="/data">
                         <Icon type="ios-paper"/>
-                        视角
+                        数据
                     </router-link>
 
                 </MenuItem>
@@ -36,8 +35,8 @@
 
 
                     <router-link tag="span" to="/meature">
-                        <Icon type="ios-paper"/>
-                        量测
+                        <Icon type="ios-analytics" />
+                        三维数据
                     </router-link>
 
 
@@ -45,27 +44,19 @@
                 <MenuItem name="11">
 
                     <router-link tag="span" to="/terrain">
-                        <Icon type="ios-paper"/>
-                        地形
+                        <Icon type="md-analytics" />
+                        空间分析
                     </router-link>
 
 
                 </MenuItem>
-                <MenuItem name="4">
 
-
-                    <router-link tag="span" to="/model">
-                        <Icon type="ios-paper"/>
-                        三维
-                    </router-link>
-
-                </MenuItem>
-                <MenuItem name="5">
+                <MenuItem name="8">
 
 
                     <router-link tag="span" to="/mark">
-                        <Icon type="ios-paper"/>
-                        标注
+                        <Icon type="ios-flag" />
+                        标绘
                     </router-link>
 
 
@@ -79,6 +70,16 @@
                     </router-link>
 
                 </MenuItem>
+                <MenuItem name="9">
+
+
+                    <router-link tag="span" to="/mark">
+                        <Icon type="ios-help-circle" />
+                        帮助
+                    </router-link>
+
+
+                </MenuItem>
             </Menu>
         </div>
         <div class="ribbon">
@@ -88,18 +89,21 @@
             </transition>
         </div>
         <!-- left-->
-        <div class="center">
+        <div class="center demo-split">
 
-                <div slot="left" class="left">
+
+            <Split v-model="split1">
+                <div slot="left" class="demo-split-pane">
                     <tabs></tabs>
                 </div>
-                <div slot="right" class="right">
-                    <!-- 地球容器 -->
+                <div slot="right" class="demo-split-pane right-pane">
                     <cesium-container></cesium-container>
                 </div>
+            </Split>
+
 
         </div>
-<!-- right-->
+        <!-- right-->
 
 
     </div>
@@ -174,7 +178,7 @@
         height: 100%;
 
         .menu {
-            .app-menu{
+            .app-menu {
                 display: flex;
                 li {
                     flex-grow: 1;
@@ -182,22 +186,27 @@
             }
 
         }
-        .ribbon{
+        .ribbon {
             height: 80px;
         }
         .center {
             display: flex;
             flex-direction: row;
             height: 100%;
-            .left{
+            .left {
                 flex-grow: 0;
                 width: 300px;
 
             }
-            .right{
+            .right {
                 flex-grow: 1;
             }
         }
+    }
+
+    .right-pane{
+        background: deepskyblue;
+        height: 100%;
     }
 
     // 动画效果相关的类样式

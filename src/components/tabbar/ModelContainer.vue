@@ -2,16 +2,6 @@
 <!-- model 模型 -->
 <template>
     <div class="layer" :class="[ message ? 'exist' : 'not-exist' ]">
-        <!--  头部区域 -->
-        <handle-header title="模型"></handle-header>
-
-        <!-- 树型组件 -->
-
-        <!--<Row class="layer-header">-->
-        <!---->
-        <!--<Col span="12"> <h1>图层管理</h1></Col>-->
-        <!--<Col span="12"><Button type="text">X</Button></Col>-->
-        <!--</Row>-->
 
 
     </div>

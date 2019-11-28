@@ -1,10 +1,13 @@
 <!-- model 模型 -->
 <template>
-    <div>
+    <div class="container">
 
-        <Tabs type="card">
+        <div class="title">工作区间</div>
+        <Tabs type="card" closable>
 
-            <TabPane v-if="isLayerControlShow" label="图层切换">图层控制</TabPane>
+            <TabPane v-if="tabPaneShowState.isLayerControlShow" label="图层切换" >
+                <layer-container></layer-container>
+            </TabPane>
 
         </Tabs>
     </div>
@@ -12,13 +15,19 @@
 
 <script>
     // 导入自己封装的轮播图子组件
+    import {mapActions, mapState} from 'vuex'
 
+    import LayerContainer from './tabbar/LayerContainer.vue'
 
     export default {
         data() {
             return {
                 isLayerControlShow: true
             };
+        },
+        computed: {
+            ...mapState(['tabPaneShowState']),
+
         },
         created() {
             // 选择显示
@@ -33,10 +42,10 @@
         },
         components: {
             // 注册子组件
-
+            LayerContainer
 
         },
-        computed: {}
+
     };
 </script>
 
@@ -48,6 +57,14 @@
         border-color: #e2e2e2;
 
         /*border: solid;*/
+    }
+
+    .container{
+
+        /*background: #3f3f3f;*/
+        .title {
+            /*background: #242424;*/
+        }
     }
 
     .exist {

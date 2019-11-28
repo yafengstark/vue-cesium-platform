@@ -1,9 +1,9 @@
 
 <!-- model 模型 -->
 <template>
-    <div class="layer" :class="[ message ? 'exist' : 'not-exist' ]">
+    <div class="container">
         <!--  头部区域 -->
-        <handle-header title="数据"></handle-header>
+
 
 
 
@@ -13,66 +13,19 @@
 
 <script>
     // 导入自己封装的轮播图子组件
-    import handleHeader from "../subcomponents/HandleHeader.vue"
 
     export default {
         data() {
             return {
 
-                data2: [
-                    {
-                        title: '基础影像',
-                        expand: false,
-                        children: [
-                            {
-                                title: 'parent 1-1',
-                                expand: true,
-                                children: [
-                                    {
-                                        title: 'leaf 1-1-1'
-                                    },
-                                    {
-                                        title: 'leaf 1-1-2'
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'parent 1-2',
-                                expand: true,
-                                children: [
-                                    {
-                                        title: 'leaf 1-2-1'
-                                    },
-                                    {
-                                        title: 'leaf 1-2-1'
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        title: '地形',
-                        expand: false,
-                        children: []
-                    },
-                    {
-                        title: '叠加图层',
-                        expand: false,
-                        children: []
-                    },
-                    {
-                        title: '标注图层',
-                        expand: false,
-                        children: []
-                    }
-                ]
+
 
 
             };
         },
         created() {
             // 选择显示
-            this.$store.commit("setIsHandleShow", true);
+
         },
         methods: {
             async getlunbotu() {
@@ -83,13 +36,11 @@
         },
         components: {
             // 注册子组件
-            handleHeader
+
 
         },
         computed: {
-            message() {
-                return this.$store.state.isHandleShow
-            }
+
         }
     };
 </script>

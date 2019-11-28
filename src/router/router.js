@@ -15,7 +15,7 @@ import StartContainer from '../components/ribbon/StartContainer.vue'
 // 创建路由对象
 const router = new VueRouter({
   routes: [
-      { path: '/'},
+      { path: '/', redirect: '/start'},
       { path: '/start', component: StartContainer },
       { path: '/layer', component: LayerContainer },
       { path: '/data', component: DataContainer },

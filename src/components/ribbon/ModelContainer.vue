@@ -6,9 +6,12 @@
             <load-model></load-model>
         </div>
         <div class="functions">
-            <Icon type="ios-hand" size="36"/>
-            <br>
-            漫游
+            <load3-d-tiles></load3-d-tiles>
+
+        </div>
+        <div class="functions">
+            <load3-d-tiles-bim></load3-d-tiles-bim>
+
         </div>
         <div class="functions">
 <!--缩放-->
@@ -33,7 +36,7 @@
         </div>
         <div class="functions">
 
-            <fast-locate></fast-locate>
+            <!--<fast-locate></fast-locate>-->
         </div>
         <div class="functions">
             <Icon type="ios-calculator" size="36"/>
@@ -62,6 +65,8 @@
     import {mapActions, mapState} from 'vuex'
 
     import LoadModel from '../subcomponents/LoadModel.vue'
+    import Load3DTiles from '../subcomponents/Load3DTiles.vue'
+    import Load3DTilesBim from '../subcomponents/Load3DTilesBim.vue'
     export default {
         data() {
             return {};
@@ -83,7 +88,9 @@
         },
         components: {
             // 注册子组件
-            LoadModel
+            LoadModel,
+            Load3DTiles,
+            Load3DTilesBim
 
         }
     };

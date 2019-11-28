@@ -2,23 +2,23 @@
     <div class="container">
 
 
-
-        <a @click="value3 = true"> <Icon type="ios-locate" size="36"/><br>快速跳转</a>
+        <a @click="value3 = true">
+            <Icon type="ios-locate" size="36"/>
+            <br>加载模型</a>
 
         <Drawer
-                title="位置"
+                title="加载模型"
                 v-model="value3"
                 width="200"
                 :styles="styles"
         >
             <Form>
                 <Row :gutter="32">
-
                     <Col span="12">
-                    <FormItem label="位置" label-position="top">
+                    <FormItem label="选择模型位置" label-position="top">
                         <br>
                         <Input class="input" v-model="location"
-                                                 placeholder="120 31 15000" style="width: 300px"/>
+                               placeholder="120 31 15000" style="width: 300px"/>
 
 
                     </FormItem>
@@ -28,7 +28,7 @@
             </Form>
             <div class="demo-drawer-footer">
                 <Button style="margin-right: 8px" @click="cancel">取消</Button>
-                <Button type="primary" @click="submit">跳转</Button>
+                <Button type="primary" @click="submit">加载</Button>
             </div>
         </Drawer>
 
@@ -41,7 +41,6 @@
     import {mapActions, mapState} from 'vuex'
 
 
-
     export default {
         data() {
             return {
@@ -52,7 +51,8 @@
                     paddingBottom: '53px',
                     position: 'static'
                 },
-                location: ''
+                location: '',
+
 
             };
         },
@@ -68,32 +68,35 @@
 
             },
             async submit() {
+                this.createModel('../../../lib/SampleData/models/CesiumAir/Cesium_Air.glb', 5000.0);
 
-                let lat = 0;
-                let lon = 0;
-                let height = 0;
+            },
 
-                var result = this.location.trim().split(/\s+/);
-                if(result.length === 3){
-                    lon = parseFloat(result[0]);
-                    lat = parseFloat(result[1]);
-                    height = parseFloat(result[2])
+            createModel(url, height) {
 
+                var viewer = this.myMap.viewer;
+                var Cesium = this.myMap.Cesium;
 
-                }else if(result.length === 2){
-                    lon = parseFloat(result[0]);
-                    lat = parseFloat(result[1]);
-                    height = 150000
-                }else{
-                    this.$Message.error("输入有误")
-                }
+                viewer.entities.removeAll();
 
+                var position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
+                var heading = Cesium.Math.toRadians(135);
+                var pitch = 0;
+                var roll = 0;
+                var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+                var orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
 
-                this.$store.state.myMap.viewer.camera.flyTo({
-                    destination : Cesium.Cartesian3.fromDegrees(lon, lat, height)
+                var entity = viewer.entities.add({
+                    name: url,
+                    position: position,
+                    orientation: orientation,
+                    model: {
+                        uri: url,
+                        minimumPixelSize: 128,
+                        maximumScale: 20000
+                    }
                 });
-
-
+                viewer.trackedEntity = entity;
             },
             cancel() {
                 this.value3 = false;
@@ -113,10 +116,10 @@
         flex-direction: column;
 
         /*label {*/
-            /*display: inline;*/
+        /*display: inline;*/
         /*}*/
         /*input {*/
-            /*display: inline;*/
+        /*display: inline;*/
         /*}*/
     }
 

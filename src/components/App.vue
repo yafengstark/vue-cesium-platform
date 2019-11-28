@@ -34,7 +34,7 @@
                 <MenuItem name="3">
 
 
-                    <router-link tag="span" to="/meature">
+                    <router-link tag="span" to="/model">
                         <Icon type="ios-analytics" />
                         三维数据
                     </router-link>

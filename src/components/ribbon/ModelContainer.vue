@@ -3,9 +3,7 @@
     <div class="container">
 
         <div class="functions">
-            <Icon type="md-arrow-up" size="36"/>
-            <br>
-            加载模型
+            <load-model></load-model>
         </div>
         <div class="functions">
             <Icon type="ios-hand" size="36"/>
@@ -63,7 +61,7 @@
     // 导入自己封装的轮播图子组件
     import {mapActions, mapState} from 'vuex'
 
-    import FastLocate from '../subcomponents/FastLocate.vue'
+    import LoadModel from '../subcomponents/LoadModel.vue'
     export default {
         data() {
             return {};
@@ -85,7 +83,7 @@
         },
         components: {
             // 注册子组件
-            FastLocate
+            LoadModel
 
         }
     };

@@ -4,6 +4,15 @@
         <!-- -->
         <cesium-viewer
                 @ready="ready"
+                :animation="animation"
+                :timeline="timeline"
+                :baseLayerPicker="baseLayerPicker"
+                :fullscreenButton="fullscreenButton"
+                :infoBox="infoBox"
+                :vrButton="vrButton"
+                :geocoder="geocoder"
+                :homeButton="homeButton"
+                :automaticallyTrackDataSourceClocks="automaticallyTrackDataSourceClocks"
                 ref="cesium"
         > </cesium-viewer>
     </div>
@@ -26,7 +35,15 @@
                     pitch: -90,
                     roll: 0
                 },
-                animation: false
+                animation: true,
+                timeline: true,
+                baseLayerPicker: true,
+                fullscreenButton: true,
+                infoBox: true,
+                vrButton: true,
+                geocoder: true,
+                homeButton: true,
+                automaticallyTrackDataSourceClocks: true
             };
         },
         created() {

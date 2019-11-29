@@ -94,7 +94,7 @@
 
             <Split v-model="split1">
                 <div slot="left" class="demo-split-pane">
-                    <tabs></tabs>
+                    <!--<tabs></tabs>-->
                 </div>
                 <div slot="right" class="demo-split-pane right-pane">
                     <cesium-container></cesium-container>
@@ -122,7 +122,7 @@
         data() {
             return {
                 flag: true, // 默认显示返回按钮
-                split1: 0.4
+                split1: 0
             };
         },
         methods: {
@@ -192,7 +192,7 @@
         .center {
             display: flex;
             flex-direction: row;
-            height: 100%;
+            height: 400px;
             .left {
                 flex-grow: 0;
                 width: 300px;

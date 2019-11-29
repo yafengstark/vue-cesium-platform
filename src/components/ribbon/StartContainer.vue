@@ -13,6 +13,18 @@
             漫游
         </div>
         <div class="functions">
+
+            <camera-tutorial></camera-tutorial>
+        </div>
+        <div class="functions">
+
+            <terrain></terrain>
+        </div>
+        <div class="functions">
+
+            <clock></clock>
+        </div>
+        <div class="functions">
 <!--缩放-->
             <Icon type="md-add" size="24"/>放大
             <br>
@@ -64,6 +76,10 @@
     import {mapActions, mapState} from 'vuex'
 
     import FastLocate from '../subcomponents/FastLocate.vue'
+    import CameraTutorial from '../subcomponents/CameraTutorial.vue'
+    import Terrain from '../subcomponents/Terrain.vue'
+    import Clock from '../subcomponents/Clock.vue'
+
     export default {
         data() {
             return {};
@@ -85,7 +101,10 @@
         },
         components: {
             // 注册子组件
-            FastLocate
+            FastLocate,
+            CameraTutorial,
+            Terrain,
+            Clock
 
         }
     };

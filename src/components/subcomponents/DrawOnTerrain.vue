@@ -168,6 +168,7 @@
 
                 var that = this;
 
+                // TODO 点击位置有偏移
                 // 鼠标左点击事件
                 handler.setInputAction(function (event) {
                     // We use `viewer.scene.pickPosition` here instead of `viewer.camera.pickEllipsoid` so that

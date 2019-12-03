@@ -25,6 +25,10 @@
             <clock></clock>
         </div>
         <div class="functions">
+
+            <tile-coordinates></tile-coordinates>
+        </div>
+        <div class="functions">
 <!--缩放-->
             <Icon type="md-add" size="24"/>放大
             <br>
@@ -79,6 +83,7 @@
     import CameraTutorial from '../subcomponents/CameraTutorial.vue'
     import Terrain from '../subcomponents/Terrain.vue'
     import Clock from '../subcomponents/Clock.vue'
+    import TileCoordinates from '../subcomponents/TileCoordinates.vue'
 
     export default {
         data() {
@@ -104,7 +109,8 @@
             FastLocate,
             CameraTutorial,
             Terrain,
-            Clock
+            Clock,
+            TileCoordinates
 
         }
     };

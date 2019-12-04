@@ -3,11 +3,11 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/clock.png" style="width: 32px">
-            <br>时钟</a>
+            <img src="../../common/images/book-mark.png" style="width: 32px">
+            <br>书签</a>
 
         <Drawer
-                title="地形"
+                title="书签"
                 v-model="value3"
                 width="400"
                 :styles="styles"

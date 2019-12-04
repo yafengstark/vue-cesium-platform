@@ -3,11 +3,11 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/point.png" style="width: 32px">
-            <br>点</a>
+            <Icon type="ios-locate" size="36"/>
+            <br>渲染</a>
 
         <Drawer
-                title="点"
+                title="渲染"
                 v-model="value3"
                 width="200"
                 :styles="styles"
@@ -28,7 +28,7 @@
             </Form>
             <div class="demo-drawer-footer">
                 <Button style="margin-right: 8px" @click="cancel">取消</Button>
-                <Button type="text" @click="addPins">add point</Button>
+                <Button type="text" @click="addPins">fps</Button>
                 <!--<Button type="text" @click="setFont">setFont</Button>-->
                 <!--<Button type="text" @click="submit3">gx KML extensions - Bike Ride</Button>-->
                 <!--<Button type="text" @click="submit4">加载geojson simplestyle</Button>-->
@@ -76,15 +76,8 @@
                 var Cesium = this.myMap.Cesium;
 
 
-                var entity = viewer.entities.add({
-                    position : Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883),
-                    point : {
-                        pixelSize : 10,
-                        color : Cesium.Color.YELLOW
-                    }
-                });
-
-                viewer.zoomTo(entity);
+                var scene = viewer.scene;
+                scene.debugShowFramesPerSecond = true;
 
 
             },

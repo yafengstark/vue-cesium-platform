@@ -3,7 +3,7 @@
 
 
         <a @click="value3 = true">
-            <Icon type="ios-locate" size="36"/>
+            <img src="../../common/images/line.png" style="width: 32px">
             <br>线</a>
 
         <Drawer

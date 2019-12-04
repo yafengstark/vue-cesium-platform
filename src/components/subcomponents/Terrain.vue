@@ -3,7 +3,7 @@
 
 
         <a @click="value3 = true">
-            <Icon type="ios-locate" size="36"/>
+            <img src="../../common/images/terrain.png" style="width: 32px">
             <br>地形</a>
 
         <Drawer

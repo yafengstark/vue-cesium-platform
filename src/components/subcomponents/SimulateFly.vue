@@ -3,11 +3,11 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/clock.png" style="width: 32px">
-            <br>时钟</a>
+            <img src="../../common/images/flyTo.png" style="width: 32px">
+            <br>模拟飞行</a>
 
         <Drawer
-                title="地形"
+                title="模拟飞行"
                 v-model="value3"
                 width="400"
                 :styles="styles"

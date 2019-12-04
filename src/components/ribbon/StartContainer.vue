@@ -30,28 +30,21 @@
         </div>
 
         <div class="functions">
-            书签
+            <book-mark></book-mark>
         </div>
         <div class="functions">
 
-            飞行漫游
+            <simulate-fly></simulate-fly>
             <!--<tile-coordinates></tile-coordinates>-->
         </div>
         <div class="functions">
             <!--缩放-->
-            <Icon type="md-add" size="24"/>
-            放大
-            <br>
-            <Icon type="md-remove" size="24"/>
-            缩小
+                <enlarge></enlarge>
+
         </div>
         <div class="functions">
             <!--缩放-->
-            <Icon type="md-add" size="24"/>
-            二维
-            <br>
-            <Icon type="md-remove" size="24"/>
-            三维
+            <scene-mode></scene-mode>
         </div>
         <div class="functions">
             <Icon type="ios-expand" size="36"/>
@@ -73,20 +66,11 @@
             <fast-locate></fast-locate>
         </div>
         <div class="functions">
-            <Icon type="ios-calculator" size="36"/>
-            <br>
-            地图量算
+            <meature></meature>
         </div>
         <div class="functions">
             <!--图层-->
-            <div @click="tabPaneShowState.isLayerControlShow = !tabPaneShowState.isLayerControlShow ">
-                <Icon type="md-albums" size="24"/>
-                图层控制
-            </div>
-            <div>
-                <Icon type="md-add" size="24"/>
-                添加图层
-            </div>
+            <layer></layer>
         </div>
 
 
@@ -102,6 +86,14 @@
     import Terrain from '../subcomponents/Terrain.vue'
     import Clock from '../subcomponents/Clock.vue'
     import TileCoordinates from '../subcomponents/TileCoordinates.vue'
+    import BookMark from '../subcomponents/BookMark.vue'
+    import SimulateFly from '../subcomponents/SimulateFly.vue'
+    import Enlarge from '../subcomponents/Enlarge.vue'
+    import SceneMode from '../subcomponents/SceneMode.vue'
+    import Meature from '../subcomponents/Meature.vue'
+    import Layer from '../subcomponents/Layer.vue'
+
+
 
     export default {
         data() {
@@ -128,7 +120,13 @@
             CameraTutorial,
             Terrain,
             Clock,
-            TileCoordinates
+            TileCoordinates,
+            BookMark,
+            SimulateFly,
+            Enlarge,
+            SceneMode,
+            Meature,
+            Layer
 
         }
     };

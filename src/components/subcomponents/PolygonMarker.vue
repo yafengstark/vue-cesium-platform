@@ -3,7 +3,7 @@
 
 
         <a @click="value3 = true">
-            <Icon type="ios-locate" size="36"/>
+            <img src="../../common/images/polygon.png" style="width: 32px">
             <br>多边形</a>
 
         <Drawer

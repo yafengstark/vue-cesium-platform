@@ -3,7 +3,7 @@
 
 
         <a @click="value3 = true">
-            <Icon type="ios-locate" size="36"/>
+            <Icon type="ios-keypad" size="36" />
             <br>键盘控制</a>
 
         <Drawer

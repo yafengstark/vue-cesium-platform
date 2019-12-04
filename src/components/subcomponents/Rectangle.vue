@@ -3,7 +3,7 @@
 
 
         <a @click="value3 = true">
-            <Icon type="ios-locate" size="36"/>
+            <img src="../../common/images/rectangle.png" style="width: 32px">
             <br>矩形</a>
 
         <Drawer

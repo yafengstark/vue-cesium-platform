@@ -4,8 +4,8 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/locate.png" style="width: 32px">
-            <br>快速跳转
+            <img src="../../common/images/layer.png" style="width: 32px">
+            <br>图层
         </a>
 
         <Drawer

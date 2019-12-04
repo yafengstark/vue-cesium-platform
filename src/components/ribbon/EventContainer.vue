@@ -31,50 +31,6 @@
         <div class="functions">
             <rectangle></rectangle>
         </div>
-        <div class="functions">
-            <!--缩放-->
-            <Icon type="md-add" size="24"/>
-            放大
-            <br>
-            <Icon type="md-remove" size="24"/>
-            缩小
-        </div>
-        <div class="functions">
-            <Icon type="ios-expand" size="36"/>
-            <br>
-            全幅
-        </div>
-        <div class="functions">
-            <Icon type="ios-eye" size="36"/>
-            <br>
-            鹰眼图
-        </div>
-        <div class="functions">
-            <Icon type="ios-locate" size="36"/>
-            <br>
-            自动定位
-        </div>
-        <div class="functions">
-
-
-            <!--<fast-locate></fast-locate>-->
-        </div>
-        <div class="functions">
-            <Icon type="ios-calculator" size="36"/>
-            <br>
-            地图量算
-        </div>
-        <div class="functions">
-            <!--图层-->
-            <div @click="tabPaneShowState.isLayerControlShow = !tabPaneShowState.isLayerControlShow ">
-                <Icon type="md-albums" size="24"/>
-                图层控制
-            </div>
-            <div>
-                <Icon type="md-add" size="24"/>
-                添加图层
-            </div>
-        </div>
 
 
     </div>

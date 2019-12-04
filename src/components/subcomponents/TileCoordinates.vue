@@ -3,7 +3,7 @@
 
 
         <a @click="value3 = true">
-            <Icon type="ios-locate" size="36"/>
+            <img src="../../common/images/pyramid.png" style="width: 32px">
             <br>瓦片网格</a>
 
         <Drawer

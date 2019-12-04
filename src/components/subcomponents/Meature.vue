@@ -4,8 +4,8 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/locate.png" style="width: 32px">
-            <br>快速跳转
+            <img src="../../common/images/ruler.png" style="width: 32px">
+            <br>地图量算
         </a>
 
         <Drawer

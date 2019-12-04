@@ -54,9 +54,9 @@
                 <MenuItem name="8">
 
 
-                    <router-link tag="span" to="/mark">
+                    <router-link tag="span" to="/event">
                         <Icon type="ios-flag" />
-                        标绘
+                        交互
                     </router-link>
 
 
@@ -64,7 +64,7 @@
                 <MenuItem name="7">
 
 
-                    <router-link tag="span" to="/setting">
+                    <router-link tag="span" to="/system">
                         <Icon type="ios-settings-outline"/>
                         设置
                     </router-link>

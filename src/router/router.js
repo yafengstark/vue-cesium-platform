@@ -11,6 +11,9 @@ import ViewContainer from '../components/tabbar/ViewContainer.vue'
 import StartContainer from '../components/ribbon/StartContainer.vue'
 import ModelContainer from '../components/ribbon/ModelContainer.vue'
 import DataContainer from '../components/ribbon/DataContainer.vue'
+import EvenContainer from '../components/ribbon/EventContainer.vue'
+
+import SystemContainer from '../components/ribbon/SystemContainer.vue'
 
 // 创建路由对象
 const router = new VueRouter({
@@ -26,6 +29,8 @@ const router = new VueRouter({
       { path: '/setting', component: SettingContainer },
       { path: '/terrain', component: TerrainContainer },
       { path: '/view', component: ViewContainer },
+      { path: '/event', component: EvenContainer },
+      { path: '/system', component: SystemContainer },
 
 
 

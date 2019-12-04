@@ -14,6 +14,25 @@
 
         </div>
         <div class="functions">
+            <load-czml></load-czml>
+        </div>
+        <div class="functions">
+            <load-geojson></load-geojson>
+        </div>
+
+        <div class="functions">
+            <load-html-element></load-html-element>
+        </div>
+
+        <div class="functions">
+            <load-kml></load-kml>
+        </div>
+
+        <div class="functions">
+            <entity></entity>
+        </div>
+
+        <div class="functions">
             <!--缩放-->
             <Icon type="md-add" size="24"/>放大
             <br>
@@ -67,6 +86,13 @@
     import LoadBillboards from '../subcomponents/LoadBillboards.vue'
     import LoadBox from '../subcomponents/LoadBox.vue'
     import LoadDynamicLine from '../subcomponents/LoadDynamicLine.vue'
+    import LoadCzml from '../subcomponents/LoadCzml.vue'
+    import LoadGeojson from '../subcomponents/LoadGeojson.vue'
+    import LoadHtmlElement from '../subcomponents/LoadHtmlElement.vue'
+    import LoadKml from '../subcomponents/LoadKml.vue'
+
+    import Entity from '../subcomponents/Entity.vue'
+
     export default {
         data() {
             return {};
@@ -90,7 +116,12 @@
             // 注册子组件
             LoadBillboards,
             LoadBox,
-            LoadDynamicLine
+            LoadDynamicLine,
+            LoadCzml,
+            LoadGeojson,
+            LoadHtmlElement,
+            LoadKml,
+            Entity
 
         }
     };

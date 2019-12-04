@@ -3,39 +3,33 @@
     <div class="container">
 
         <div class="functions">
-            <Icon type="md-arrow-up" size="36"/>
-            <br>
-            选择
+            <draw-on-terrain></draw-on-terrain>
         </div>
         <div class="functions">
-            <Icon type="ios-hand" size="36"/>
-            <br>
-            漫游
+            <text-marker></text-marker>
         </div>
         <div class="functions">
-
-            <camera-tutorial></camera-tutorial>
+            <!--<load3-d-tiles-bim></load3-d-tiles-bim>-->
+            <map-pins></map-pins>
         </div>
         <div class="functions">
-
-            <terrain></terrain>
+            <!--<load3-d-tiles-bim></load3-d-tiles-bim>-->
+            <pick></pick>
         </div>
         <div class="functions">
-
-            <clock></clock>
+            <!--<load3-d-tiles-bim></load3-d-tiles-bim>-->
+            <point></point>
         </div>
         <div class="functions">
-
-            <tile-coordinates></tile-coordinates>
-        </div>
-
-        <div class="functions">
-            书签
+            <!--<load3-d-tiles-bim></load3-d-tiles-bim>-->
+            <polygon-marker></polygon-marker>
         </div>
         <div class="functions">
-
-            飞行漫游
-            <!--<tile-coordinates></tile-coordinates>-->
+            <!--<load3-d-tiles-bim></load3-d-tiles-bim>-->
+            <polyline-marker></polyline-marker>
+        </div>
+        <div class="functions">
+            <rectangle></rectangle>
         </div>
         <div class="functions">
             <!--缩放-->
@@ -44,14 +38,6 @@
             <br>
             <Icon type="md-remove" size="24"/>
             缩小
-        </div>
-        <div class="functions">
-            <!--缩放-->
-            <Icon type="md-add" size="24"/>
-            二维
-            <br>
-            <Icon type="md-remove" size="24"/>
-            三维
         </div>
         <div class="functions">
             <Icon type="ios-expand" size="36"/>
@@ -70,7 +56,8 @@
         </div>
         <div class="functions">
 
-            <fast-locate></fast-locate>
+
+            <!--<fast-locate></fast-locate>-->
         </div>
         <div class="functions">
             <Icon type="ios-calculator" size="36"/>
@@ -97,11 +84,15 @@
     // 导入自己封装的轮播图子组件
     import {mapActions, mapState} from 'vuex'
 
-    import FastLocate from '../subcomponents/FastLocate.vue'
-    import CameraTutorial from '../subcomponents/CameraTutorial.vue'
-    import Terrain from '../subcomponents/Terrain.vue'
-    import Clock from '../subcomponents/Clock.vue'
-    import TileCoordinates from '../subcomponents/TileCoordinates.vue'
+    import DrawOnTerrain from '../subcomponents/DrawOnTerrain.vue'
+    import TextMarker from '../subcomponents/TextMarker.vue'
+    import MapPins from '../subcomponents/MapPins.vue'
+    import Pick from '../subcomponents/Pick.vue'
+    import Point from '../subcomponents/Point.vue'
+    import PolygonMarker from '../subcomponents/PolygonMarker.vue'
+    import PolylineMarker from '../subcomponents/PolylineMarker.vue'
+
+    import Rectangle from '../subcomponents/Rectangle.vue'
 
     export default {
         data() {
@@ -124,11 +115,14 @@
         },
         components: {
             // 注册子组件
-            FastLocate,
-            CameraTutorial,
-            Terrain,
-            Clock,
-            TileCoordinates
+            DrawOnTerrain,
+            TextMarker,
+            MapPins,
+            Pick,
+            Point,
+            PolygonMarker,
+            PolylineMarker,
+            Rectangle
 
         }
     };

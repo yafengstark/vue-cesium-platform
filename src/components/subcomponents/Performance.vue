@@ -4,7 +4,7 @@
 
         <a @click="value3 = true">
             <Icon type="ios-locate" size="36"/>
-            <br>渲染</a>
+            <br>性能</a>
 
         <Drawer
                 title="渲染"

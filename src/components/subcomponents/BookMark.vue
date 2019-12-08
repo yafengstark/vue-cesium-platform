@@ -29,8 +29,8 @@
                 </Row>
             </Form>
             <div class="demo-drawer-footer">
-                <Button style="margin-right: 8px" @click="cancel">取消</Button>
-                <Button type="primary" @click="submit">生效</Button>
+                <Button style="margin-right: 8px" @click="cancel">跳转场景参数</Button>
+                <Button type="primary" @click="submit">保存当前场景参数</Button>
             </div>
         </Drawer>
 
@@ -74,22 +74,17 @@
                 var viewer = this.myMap.viewer;
                 var Cesium = this.myMap.Cesium;
 
-                var clock = new Cesium.Clock({
-                    startTime : Cesium.JulianDate.fromIso8601("2013-12-25"),
-                    currentTime : Cesium.JulianDate.fromIso8601("2013-12-25"),
-                    stopTime : Cesium.JulianDate.fromIso8601("2013-12-26"),
-                    clockRange : Cesium.ClockRange.LOOP_STOP, // loop when we hit the end time
-                    clockStep : Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER,
-                    multiplier : 4000 // how much time to advance each tick
-                });
+                var camera = viewer.camera;
 
-                var resetTime = Cesium.JulianDate.fromIso8601("2013-12-25");
-                viewer.clockViewModel.currentTime = resetTime;
-                viewer.timeline.updateFromClock();
+                console.log(camera.position);
+                console.log(camera.direction)
+                console.log(camera.up)
+                console.log(camera.frustum.fov)
+                console.log(camera.frustum.near)
+                console.log(camera.frustum.far)
 
-//                viewer.clockViewModel.clock =clock;
 
-                viewer.scene.globe.enableLighting = true;
+
 
 
 

@@ -14,6 +14,7 @@ import DataContainer from '../components/ribbon/DataContainer.vue'
 import EvenContainer from '../components/ribbon/EventContainer.vue'
 
 import SystemContainer from '../components/ribbon/SystemContainer.vue'
+import AnalyseContainer from '../components/ribbon/AnalyseContainer.vue'
 
 // 创建路由对象
 const router = new VueRouter({
@@ -31,6 +32,7 @@ const router = new VueRouter({
       { path: '/view', component: ViewContainer },
       { path: '/event', component: EvenContainer },
       { path: '/system', component: SystemContainer },
+      { path: '/analyse', component: AnalyseContainer },
 
 
 

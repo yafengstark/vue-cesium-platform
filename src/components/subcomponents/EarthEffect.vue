@@ -3,8 +3,8 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/clock.png" style="width: 32px">
-            <br>时钟</a>
+            <img src="../../common/images/night_landscape.png" style="width: 32px">
+            <br>地图效果</a>
 
         <Drawer
                 title="时钟"
@@ -22,8 +22,8 @@
                 </Row>
             </Form>
             <div class="demo-drawer-footer">
-                <Button style="margin-right: 8px" @click="cancel">取消时钟插件</Button>
-                <Button type="primary" @click="submit">重置时钟时间</Button>
+                <Button style="margin-right: 8px" @click="cancel">取消光效</Button>
+                <Button type="primary" @click="submit">启动光效</Button>
             </div>
         </Drawer>
 
@@ -67,24 +67,7 @@
                 var viewer = this.myMap.viewer;
                 var Cesium = this.myMap.Cesium;
 
-                var clock = new Cesium.Clock({
 
-                    startTime : Cesium.JulianDate.fromIso8601("2013-12-25"),
-                    //
-                    currentTime : Cesium.JulianDate.fromIso8601("2013-12-25"),
-                    stopTime : Cesium.JulianDate.fromIso8601("2013-12-26"),
-                    // 时间循环
-                    clockRange : Cesium.ClockRange.LOOP_STOP, // loop when we hit the end time
-                    clockStep : Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER,
-                    // 加速
-                    multiplier : 4000 // how much time to advance each tick
-                });
-
-                var resetTime = Cesium.JulianDate.fromIso8601("2013-12-25");
-                viewer.clockViewModel.currentTime = resetTime;
-                viewer.timeline.updateFromClock();
-
-//                viewer.clockViewModel.clock =clock;
 
                 // 光效
                 viewer.scene.globe.enableLighting = true;
@@ -98,9 +81,8 @@
                 this.$Message.info('试图取消');
                 //
                 var viewer = this.myMap.viewer;
-                var Cesium = this.myMap.Cesium;
-                // 应该不成功，因为是只读属性
-                viewer.animation = true;
+                // 光效
+                viewer.scene.globe.enableLighting = false;
             }
         },
         components: {

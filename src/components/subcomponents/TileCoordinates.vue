@@ -29,8 +29,8 @@
                 </Row>
             </Form>
             <div class="demo-drawer-footer">
-                <Button style="margin-right: 8px" @click="cancel">移除</Button>
-                <Button type="primary" @click="submit">生效</Button>
+                <Button style="margin-right: 8px" @click="cancel">取消金字塔网格</Button>
+                <Button type="primary" @click="submit">启动金字塔网格</Button>
             </div>
         </Drawer>
 

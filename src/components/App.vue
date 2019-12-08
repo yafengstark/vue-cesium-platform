@@ -43,7 +43,7 @@
                 </MenuItem>
                 <MenuItem name="11">
 
-                    <router-link tag="span" to="/terrain">
+                    <router-link tag="span" to="/analyse">
                         <Icon type="md-analytics" />
                         空间分析
                     </router-link>

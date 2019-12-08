@@ -3,11 +3,11 @@
 
 
         <a @click="value3 = true">
-            <img src="../../common/images/clock.png" style="width: 32px">
-            <br>时钟</a>
+            <img src="../../common/images/book-mark.png" style="width: 32px">
+            <br>书签</a>
 
         <Drawer
-                title="时钟"
+                title="书签"
                 v-model="value3"
                 width="400"
                 :styles="styles"
@@ -17,13 +17,20 @@
                     <Col span="12">
 
 
+                    <!--<FormItem label="选择模型位置" label-position="top">-->
+                        <!--<br>-->
+                        <!--<Input class="input" v-model="location"-->
+                               <!--placeholder="120 31 15000" style="width: 300px"/>-->
+
+
+                    <!--</FormItem>-->
                     </Col>
 
                 </Row>
             </Form>
             <div class="demo-drawer-footer">
-                <Button style="margin-right: 8px" @click="cancel">取消时钟插件</Button>
-                <Button type="primary" @click="submit">重置时钟时间</Button>
+                <Button style="margin-right: 8px" @click="cancel">取消</Button>
+                <Button type="primary" @click="submit">生效</Button>
             </div>
         </Drawer>
 
@@ -68,15 +75,11 @@
                 var Cesium = this.myMap.Cesium;
 
                 var clock = new Cesium.Clock({
-
                     startTime : Cesium.JulianDate.fromIso8601("2013-12-25"),
-                    //
                     currentTime : Cesium.JulianDate.fromIso8601("2013-12-25"),
                     stopTime : Cesium.JulianDate.fromIso8601("2013-12-26"),
-                    // 时间循环
                     clockRange : Cesium.ClockRange.LOOP_STOP, // loop when we hit the end time
                     clockStep : Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER,
-                    // 加速
                     multiplier : 4000 // how much time to advance each tick
                 });
 
@@ -86,7 +89,6 @@
 
 //                viewer.clockViewModel.clock =clock;
 
-                // 光效
                 viewer.scene.globe.enableLighting = true;
 
 
@@ -95,12 +97,7 @@
 
 
             cancel() {
-                this.$Message.info('试图取消');
-                //
-                var viewer = this.myMap.viewer;
-                var Cesium = this.myMap.Cesium;
-                // 应该不成功，因为是只读属性
-                viewer.animation = true;
+                this.value3 = false;
             }
         },
         components: {

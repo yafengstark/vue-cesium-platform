@@ -2,16 +2,16 @@
 <template>
     <div class="container">
 
-        <div class="functions">
-            <Icon type="md-arrow-up" size="36"/>
-            <br>
-            选择
-        </div>
-        <div class="functions">
-            <Icon type="ios-hand" size="36"/>
-            <br>
-            漫游
-        </div>
+        <!--<div class="functions">-->
+            <!--<Icon type="md-arrow-up" size="36"/>-->
+            <!--<br>-->
+            <!--选择-->
+        <!--</div>-->
+        <!--<div class="functions">-->
+            <!--<Icon type="ios-hand" size="36"/>-->
+            <!--<br>-->
+            <!--漫游-->
+        <!--</div>-->
         <div class="functions">
 
             <camera-tutorial></camera-tutorial>
@@ -23,6 +23,10 @@
         <div class="functions">
 
             <clock></clock>
+        </div>
+        <div class="functions">
+
+            <camera></camera>
         </div>
         <div class="functions">
 
@@ -41,6 +45,10 @@
             <!--缩放-->
                 <enlarge></enlarge>
 
+        </div>
+        <div class="functions">
+            <!--缩放-->
+            <scene-mode></scene-mode>
         </div>
         <div class="functions">
             <!--缩放-->
@@ -92,6 +100,10 @@
     import SceneMode from '../subcomponents/SceneMode.vue'
     import Meature from '../subcomponents/Meature.vue'
     import Layer from '../subcomponents/Layer.vue'
+    import Camera from '../subcomponents/Camera.vue'
+    import Heatmap from '../subcomponents/Heatmap.vue'
+    import OdLine from '../subcomponents/OdLine.vue'
+
 
 
 
@@ -126,7 +138,10 @@
             Enlarge,
             SceneMode,
             Meature,
-            Layer
+            Layer,
+            Camera,
+            Heatmap,
+            OdLine
 
         }
     };

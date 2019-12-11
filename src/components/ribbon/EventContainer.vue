@@ -32,12 +32,7 @@
             <rectangle></rectangle>
         </div>
 
-        <div class="functions">
-            <heatmap></heatmap>
-        </div>
-        <div class="functions">
-            <od-line></od-line>
-        </div>
+
 
     </div>
 </template>
@@ -56,8 +51,6 @@
 
     import Rectangle from '../subcomponents/Rectangle.vue'
 
-    import Heatmap from '../subcomponents/Heatmap.vue'
-    import OdLine from '../subcomponents/OdLine.vue'
 
     export default {
         data() {
@@ -88,8 +81,7 @@
             PolygonMarker,
             PolylineMarker,
             Rectangle,
-            Heatmap,
-            OdLine
+
 
         }
     };

@@ -1,6 +1,6 @@
 <template>
     <!-- Cesium容器 -->
-    <div class="viewer">
+    <div class="viewer" id="cccc">
         <!-- -->
         <cesium-viewer
                 @ready="ready"

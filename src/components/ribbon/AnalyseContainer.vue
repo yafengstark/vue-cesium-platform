@@ -3,10 +3,13 @@
     <div class="container">
 
         <div class="functions">
-            <performance></performance>
+            <scatter></scatter>
         </div>
         <div class="functions">
-            <earth-effect></earth-effect>
+            <heatmap></heatmap>
+        </div>
+        <div class="functions">
+            <od-line></od-line>
         </div>
 
 
@@ -17,9 +20,12 @@
     // 导入自己封装的轮播图子组件
     import {mapActions, mapState} from 'vuex'
 
-    import Performance from '../subcomponents/Performance.vue'
+    import Scatter from '../subcomponents/Scatter.vue'
     import EarthEffect from '../subcomponents/EarthEffect.vue'
     import Load3DTilesBim from '../subcomponents/Load3DTilesBim.vue'
+
+    import Heatmap from '../subcomponents/Heatmap.vue'
+    import OdLine from '../subcomponents/OdLine.vue'
 
 
     export default {
@@ -43,9 +49,11 @@
         },
         components: {
             // 注册子组件
-            Performance,
+            Scatter,
             EarthEffect,
-            Load3DTilesBim
+            Load3DTilesBim,
+            Heatmap,
+            OdLine
 
         }
     };

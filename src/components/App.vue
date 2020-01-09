@@ -113,9 +113,10 @@
 
 <script>
     import {mapGetters} from "vuex";
-    import VueCesium from 'vue-cesium'
+    import VueCesium from 'vue-cesium';
 
-    import CesiumContainer from './subcomponents/CesiumContainer.vue'
+
+    import CesiumContainer from './subcomponents/CesiumContainer.vue';
 
 
     export default {
@@ -176,7 +177,7 @@
         height: 100%;
         display: flex;
         padding: 0px;
-        // 当有组件切换动效的时候，一瞬间，页面的宽度会变成 正常宽度的 2 倍，此时，需要隐藏超出屏幕宽度的区域
+        
         overflow: hidden;
 
         .ivu-menu-vertical .ivu-menu-submenu-title-icon {

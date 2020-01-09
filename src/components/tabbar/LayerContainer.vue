@@ -146,7 +146,7 @@
 								label: { 
 									text: entity.properties.CITY_NAME, 
 									font: font_size[ entity.properties.POP_RANK - 1] + 'px Helvetica', 
-									distanceDisplayCondition:dist_con_ar[ 7 - entity.properties.POP_RANK],
+									//distanceDisplayCondition:dist_con_ar[ 7 - entity.properties.POP_RANK],
 									fillColor: Cesium.Color.WHITE, 
 									outlineColor: Cesium.Color.BLACK, 
 									outlineWidth: 5, 

@@ -25,9 +25,9 @@
                 <vc-provider-imagery-arcgis-mapserver :url="url_city_label"></vc-provider-imagery-arcgis-mapserver>
             </vc-layer-imagery>
 
-            <vc-layer-imagery>
+            <!--<vc-layer-imagery>
                 <vc-provider-imagery-arcgis-mapserver :url="url_zj_img"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>
+            </vc-layer-imagery>-->
 
 
             <!--<vc-layer-imagery>

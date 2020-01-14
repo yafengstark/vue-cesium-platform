@@ -97,14 +97,19 @@
             </Submenu>
         </Menu>
 
+        <div class="app-sub-container">
+            <!-- 路由的容器 -->
+            <div class="app-view">
+                <transition class="app-view">
+                    <router-view></router-view>
+                </transition>
+            </div>
+            
 
-        <!-- 路由的容器 -->
-        <transition class="app-view" >
-            <router-view></router-view>
-        </transition>
-
-        <!-- 地球容器 -->
-        <cesium-container></cesium-container>
+            <!-- 地球容器 -->
+            <cesium-container></cesium-container>
+        </div>
+        
 
 
     </div>
@@ -184,6 +189,13 @@
 
             opacity: 0;
         }
+
+    .app-sub-container{
+        position:relative;
+        width:100%;
+        height:100%;
+    }
+
         .app-nav {
 
 
@@ -193,7 +205,9 @@
 
         }
         .app-view {
-
+            width:200px;
+            height:100%;
+            float:left;
         }
 
         a {

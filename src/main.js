@@ -23,12 +23,16 @@ Vue.use(VueCesium, {
     // 项目本地的Cesium Build包，vue项目需要将Cesium Build包放static目录：
     //cesiumPath: '../lib/Cesium/Cesium.js'
     // 个人在线Cesium Build包：
-     cesiumPath: 'https://zouyaoji.top/vue-cesium/statics/Cesium/Cesium.js',
+    //cesiumPath: 'https://zouyaoji.top/vue-cesium/statics/Cesium/Cesium.js',
+
+    //zouyaoji未压缩库
+    cesiumPath: 'https://zouyaoji.top/vue-cesium/statics/CesiumUnminified/Cesium.js',
+    
     // 个人在线SuperMap Cesium Build包（在官方基础上二次开发出来的）：
     // cesiumPath: 'https://zouyaoji.top/vue-cesium/statics/SuperMapCesium/Cesium.js'
     // 官方在线Cesium Build包，有CDN加速，推荐用这个：
      //cesiumPath: 'https://unpkg.com/cesium/Build/Cesium/Cesium.js',
-    accessToken:'',
+    accessToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNjdiMTVjZi05ZWFmLTQ5ZjUtOTZjNC1mMGE4MjRiY2YwNTEiLCJpZCI6NDU4Miwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImlhdCI6MTU2NTU5NjYwMX0.f3lzLrcBxpOpjfpaabn__48DfLSWBkzQ95shbW5XJ0w',
     lang: lang
 })
 

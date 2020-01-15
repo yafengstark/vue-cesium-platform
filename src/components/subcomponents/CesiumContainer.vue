@@ -21,19 +21,32 @@
                 <vc-provider-imagery-arcgis-mapserver :url="url_city"></vc-provider-imagery-arcgis-mapserver>
             </vc-layer-imagery>
 
-            <vc-layer-imagery>
-                <vc-provider-imagery-arcgis-mapserver :url="url_city_label"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>
-
             <!--<vc-layer-imagery>
+        <vc-provider-imagery-arcgis-mapserver :url="url_city_label"></vc-provider-imagery-arcgis-mapserver>
+    </vc-layer-imagery>-->
+
+
+            <!--加载geojson作为标注-->
+            <vc-datasource-geojson data="https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=fname&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=geojson"
+                                   @ready="labelLoaded"
+                                   :show="show"
+                                   :options="labelOptions"
+                                   >
+
+            </vc-datasource-geojson>
+
+           
+
+            <vc-layer-imagery>
                 <vc-provider-imagery-arcgis-mapserver :url="url_zj_img"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>-->
+            </vc-layer-imagery>
 
 
             <!--<vc-layer-imagery>
         <vc-provider-imagery-tianditu mapStyle="cva_c" :token="tk"></vc-provider-imagery-tianditu>
     </vc-layer-imagery>-->
-
+            <!--加载地形 有地形后底部坐标信息就会显示高度-->
+            <vc-provider-terrain-cesium ref="terrain"></vc-provider-terrain-cesium>
         </vc-viewer>
 
     </div>
@@ -91,7 +104,16 @@
                 url: 'https://gis.zjgisdev.com/hserver/rest/services//ZJ_BOU_PRO_LN/MapServer', //arcgis 服务
                 url_city: 'https://gis.zjgisdev.com/hserver/rest/services/ZJ_BOU_CIT_LN/MapServer',
                 url_zj_img: 'https://gis.zjgisdev.com/hserver/rest/services//ZJ_IMG_FULL/MapServer',
-                url_city_label:'https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/MapServer'
+                url_city_label: 'https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/MapServer',
+
+                show: false,
+
+                labelOptions: {
+                    markerSymbol: '.',
+                    markerSize:1
+                }
+                
+                
             }
         },
 
@@ -192,6 +214,33 @@
 
                 console.log(cameraHeight);
 
+            },
+
+            //11个地市注记加载
+            labelLoaded(cesiumInstance) {
+                debugger;
+                //cesiumInstance.viewer.zoomTo(cesiumInstance.cesiumObject);
+
+                var entities = cesiumInstance.cesiumObject.entities; 
+                var values = entities.values;
+                values.forEach(function (item, index) {
+                    debugger;
+                    var id = item.id;
+
+                    entities.getById(id).label = new Cesium.LabelGraphics({
+                        show: true,
+                        text: item.name,
+                        //fontSize:'12pt',
+                        font: '14pt yahei',
+                        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                        outlineWidth: 2,
+                        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                        pixelOffset: new Cesium.Cartesian2(0, -9)
+                    });
+                });
+
+                this.show = true;
+				
             }
         },
         components: {

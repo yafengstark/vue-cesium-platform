@@ -9,7 +9,7 @@
                    :animation="animation">
             <vc-navigation :options="options"></vc-navigation>
 
-            <vc-layer-imagery>
+            <!--<vc-layer-imagery>
                 <vc-provider-imagery-tianditu mapStyle="img_c" :token="tk"></vc-provider-imagery-tianditu>
             </vc-layer-imagery>
 
@@ -19,29 +19,32 @@
 
             <vc-layer-imagery>
                 <vc-provider-imagery-arcgis-mapserver :url="url_city"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>
+            </vc-layer-imagery>-->
 
             <!--<vc-layer-imagery>
         <vc-provider-imagery-arcgis-mapserver :url="url_city_label"></vc-provider-imagery-arcgis-mapserver>
     </vc-layer-imagery>-->
-
-
             <!--加载geojson作为标注-->
             <vc-datasource-geojson data="https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=fname&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=geojson"
                                    @ready="labelLoaded"
                                    :show="show"
-                                   :options="labelOptions"
-                                   >
+                                   :options="labelOptions">
 
             </vc-datasource-geojson>
 
-           
+            <!--地名点-->
+            <!--<vc-datasource-geojson data="/public/zj_pn_2000.geojson"
+                           :show="showPn"
+                           :options="pnOptions">
 
-            <vc-layer-imagery>
-                <vc-provider-imagery-arcgis-mapserver :url="url_zj_img"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>
+            </vc-datasource-geojson>-->
 
 
+            
+
+            <!--<vc-layer-imagery>
+        <vc-provider-imagery-arcgis-mapserver :url="url_zj_img"></vc-provider-imagery-arcgis-mapserver>
+    </vc-layer-imagery>-->
             <!--<vc-layer-imagery>
         <vc-provider-imagery-tianditu mapStyle="cva_c" :token="tk"></vc-provider-imagery-tianditu>
     </vc-layer-imagery>-->
@@ -105,12 +108,18 @@
                 url_city: 'https://gis.zjgisdev.com/hserver/rest/services/ZJ_BOU_CIT_LN/MapServer',
                 url_zj_img: 'https://gis.zjgisdev.com/hserver/rest/services//ZJ_IMG_FULL/MapServer',
                 url_city_label: 'https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/MapServer',
-
+                url_pn_label:'https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/MapServer',
                 show: false,
 
                 labelOptions: {
-                    markerSymbol: '.',
+                    markerSymbol: '',
                     markerSize:1
+                },
+
+                showPn: false,
+                pnOptions: {
+                    markerSymbol: ''
+                    
                 }
                 
                 
@@ -186,13 +195,18 @@
             changed(percentage) {
                 //debugger;
                 //return;
-                console.log(g_viewer.camera.pitch);
+                
+                console.log('pitch:' + g_viewer.camera.pitch);
 
                 //这个椭球形就是地球了
                 var ellipsoid = g_viewer.scene.globe.ellipsoid;
 
                 // 镜头移动的速率基于镜头离地球的高度
                 var cameraHeight = ellipsoid.cartesianToCartographic(g_viewer.camera.position).height;
+
+
+                this.showPlaceNames(g_viewer, cameraHeight);
+                console.log('height:' + cameraHeight / 1000 );
 
 
                 return;
@@ -218,13 +232,15 @@
 
             //11个地市注记加载
             labelLoaded(cesiumInstance) {
-                debugger;
+                //debugger;
                 //cesiumInstance.viewer.zoomTo(cesiumInstance.cesiumObject);
 
                 var entities = cesiumInstance.cesiumObject.entities; 
                 var values = entities.values;
+                var condition = new Cesium.DistanceDisplayCondition(1500, 700000);
+                var scaldistance = new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0);
                 values.forEach(function (item, index) {
-                    debugger;
+                    //debugger;
                     var id = item.id;
 
                     entities.getById(id).label = new Cesium.LabelGraphics({
@@ -235,12 +251,65 @@
                         style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                         outlineWidth: 2,
                         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-                        pixelOffset: new Cesium.Cartesian2(0, -9)
+                        pixelOffset: new Cesium.Cartesian2(0, -9),
+                        translucencyByDistanc: scaldistance,
+                        scaleByDistance: scaldistance,
+                        distanceDisplayCondition: condition
                     });
                 });
 
                 this.show = true;
 				
+            },
+
+            //动态显示地名数据
+            showPlaceNames(view,cameraHeight) {
+                console.log('显示地名');
+
+                
+                
+                if (cameraHeight < 1700000) {
+                    //地市级  1700公里以内时显示地级市
+                }
+
+                if (cameraHeight < 200000) {
+                    //县区  景点公园  湖泊 水系
+                }
+
+                if (cameraHeight < 100000) {
+                    //镇
+                }
+
+                var url = 'https://gis.zjgisdev.com/hserver/rest/services/zj_pn/FeatureServer/0/query?where=fcode%3D+%273101040106%27&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=objectid%2Cname&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=geojson';
+                var url = '/public/zj_pn.geojson';
+               
+                
+                if (view.dataSources.getByName('zj_pn').length < 1) {
+
+                    var ds = new Cesium.GeoJsonDataSource('zj_pn');
+                    view.dataSources.add(ds);
+
+                    Cesium.Resource.fetchJson({
+                        url: url,
+                        queryParameters: ''
+                    }).then(function (jsondata) {
+
+                        // Create a label collection with two labels
+                        //var labels = scene.primitives.add(new Cesium.LabelCollection());
+                        ds.jsondata = jsondata;
+                        debugger;
+                    }).otherwise(function (error) {
+                        // an error occurred
+                    });
+
+                  
+							
+																	
+
+                    
+                }
+                
+
             }
         },
         components: {

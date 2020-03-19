@@ -13,9 +13,10 @@
 
         左键选点，右键结束
         <br/>
-        <Button @click="startDraw">开始绘制</Button>
-        <Button @click="stopDraw">结束绘制</Button>
-        <Button @click="clearAndReDraw">重新绘制</Button>
+
+
+        绘制：<i-switch v-model="switch1" @on-change="change" />
+
         <Button @click="saveDraw">保存绘制结果</Button>
 
 
@@ -33,6 +34,7 @@
     export default {
         data() {
             return {
+                switch1: false,
                 // 当前绘制的类型
                 drawMode: 'point',
                 // 当前是否在绘制中
@@ -111,12 +113,23 @@
         },
         methods: {
 
+
             changeShow(layer) {
                 console.log(layer);
             },
             hideIt() {
                 console.log('点击了隐藏');
                 this.$store.commit('setGraphicsWorkspaceViz', {show: false});
+            },
+            change (status) {
+                this.$Message.info('开关状态：' + status);
+
+                if(status){
+                    this.startDraw();
+                }else{
+                    this.stopDraw();
+                }
+
             },
             /**
              * 返回
@@ -191,15 +204,18 @@
             },
 
             startDraw() {
-
-                this.isDrawing = true;
-
-                //
-                this.clearDraw();
-
                 var Cesium = this.$store.state.Cesium;
                 var viewer = this.$store.state.viewer;
                 var that = this;
+
+                if (this.endPositions.length > 0) {
+                    this.endPositions = [];
+                }
+                if (this.endEntity !== undefined) {
+                    console.log('清空上次绘制结果')
+                    viewer.entities.remove(this.endEntity);
+                }
+
 
 
                 // 获取事件句柄
@@ -213,11 +229,7 @@
 
                 // Redraw the shape so it's not dynamic and remove the dynamic shape.
                 // 暂停绘制
-                function terminateShape() {
 
-                    that.stopDraw();
-
-                }
 
                 //绘制点
                 /**
@@ -280,17 +292,17 @@
                             // 第一次点击
 
                             //
-//                            var dynamicPositions = new Cesium.CallbackProperty(function () {
-//                                // 动态响应图形，
-//                                if (that.drawMode === 'polygon') {
-//                                    return new Cesium.PolygonHierarchy(that.activePositions);
-//                                }
-//                                return that.activePositions;
-//                            }, false);
+                            var dynamicPositions = new Cesium.CallbackProperty(function () {
+                                // 动态响应图形，
+                                if (that.drawMode === 'polygon') {
+                                    return new Cesium.PolygonHierarchy(that.activePositions);
+                                }
+                                return that.activePositions;
+                            }, false);
 
                             // 绘制中间过程的动态图形
                             // 传入的是function
-                            that.activeEntity = that.drawShape(that.activePositions);
+                            that.activeEntity = that.drawShape(dynamicPositions);
 
 
                         } else {
@@ -330,26 +342,22 @@
 
                 // 右键暂停绘制
                 that.handler.setInputAction(function (event) {
-                    terminateShape();
+                    that.terminateDraw();
                 }, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
 
 
             },
-            stopDraw() {
+            terminateDraw() {
 
-                console.log('点击了结束绘制');
+                console.log('右键结束绘制');
                 var Cesium = this.$store.state.Cesium;
                 var viewer = this.$store.state.viewer;
                 var that = this;
 
 
-                this.isDrawing = false;
-
                 // 结束绘制时的点集
                 that.endPositions = [];
-                console.log('准备保存')
-                console.log(this.floatingPositions.length)
-                console.log(this.endPositions.length)
+
                 this.floatingPositions.forEach(item => {
                     that.endPositions.push(item);
                 });
@@ -359,8 +367,8 @@
                     //绘制最终图
                     that.endEntity = that.drawShape(that.endPositions);
 
-                    console.log('-结束绘制时的点集--')
-                    console.log(that.endPositions)
+                    console.log('-右键结束绘制时的点集--')
+                    console.log(that.endPositions.length)
                 }
 
 
@@ -391,7 +399,7 @@
                     that.activeEntity = undefined;
                 }
 
-                console.log(that.floatingPositions.length);
+
 
 
                 //
@@ -402,12 +410,16 @@
                     handler.removeInputAction(Cesium.ScreenSpaceEventType.RIGHT_CLICK);
                 }
 
-
-
-
-
             },
-            // 还原数据
+            stopDraw(){
+                var handler = this.handler;
+                if(handler !== undefined){
+                    handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
+                    handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+                    handler.removeInputAction(Cesium.ScreenSpaceEventType.RIGHT_CLICK);
+                }
+            },
+            // 还原数据,清空结果
             clearDraw() {
                 var Cesium = this.$store.state.Cesium;
                 var viewer = this.$store.state.viewer;
@@ -455,13 +467,6 @@
                 console.log(this.endPositions.length)
 
             },
-            clearAndReDraw() {
-
-                this.clearDraw();
-                this.startDraw();
-
-
-            },
             saveDraw() {
 
                 if (this.isDrawing) {
@@ -476,7 +481,6 @@
                 console.log('绘制结果')
                 console.log(this.endPositions.length);
 
-                this.clearDraw();
             },
 
 

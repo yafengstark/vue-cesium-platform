@@ -2,16 +2,17 @@
 <template>
     <div class="container">
 
+        <!-- 视图 -->
         <div class="functions">
-            <load-model></load-model>
+            <Button @click="showLayer">图层</Button>
         </div>
         <div class="functions">
-            <load3-d-tiles></load3-d-tiles>
+            <Button @click="showBookmark">书签</Button>
+        </div>
+        <div class="functions">
+            <Button @click="showGrapics">标注</Button>
+        </div>
 
-        </div>
-        <div class="functions">
-            <load3-d-tiles-bim></load3-d-tiles-bim>
-        </div>
 
     </div>
 </template>
@@ -28,7 +29,10 @@
             return {};
         },
         computed: {
-            ...mapState(['tabPaneShowState']),
+            ...mapState([
+                'isLayerControlShow',
+                'isBookmarkWorkspaceShow'
+            ]),
 
         },
         created() {
@@ -40,6 +44,17 @@
                 // 获取轮播图的方法
                 const {data} = await this.$http.get("/getlunbo");
                 if (data.status === 200) this.lunbotu = data.result;
+            },
+            showLayer(){
+                this.$store.commit('setIsLayerControlViz', {show: true});
+            },
+            showBookmark(){
+                this.$store.commit('setBookmarkWorkspaceViz', {show: true});
+                console.log('设置书签显示成功')
+            },
+            showGrapics(){
+                this.$store.commit('setGraphicsWorkspaceViz', {show: true});
+                console.log('设置显示成功')
             }
         },
         components: {

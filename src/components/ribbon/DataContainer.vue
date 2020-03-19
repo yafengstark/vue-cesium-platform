@@ -1,6 +1,9 @@
-<!-- model 模型 -->
+
 <template>
     <div class="container">
+        <!-- 插入 -->
+
+
 
         <div class="functions">
             <load-billboards></load-billboards>
@@ -48,6 +51,8 @@
     import LoadKml from '../subcomponents/LoadKml.vue'
 
     import Entity from '../subcomponents/Entity.vue'
+
+    import BookMark from '../subcomponents/BookMark.vue'
 
     export default {
         data() {

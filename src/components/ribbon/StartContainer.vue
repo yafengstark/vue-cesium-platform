@@ -1,17 +1,11 @@
 <!-- model 模型 -->
 <template>
     <div class="container">
+        <div class="functions">
+<!--快速跳转-->
+            <fast-locate></fast-locate>
+        </div>
 
-        <!--<div class="functions">-->
-            <!--<Icon type="md-arrow-up" size="36"/>-->
-            <!--<br>-->
-            <!--选择-->
-        <!--</div>-->
-        <!--<div class="functions">-->
-            <!--<Icon type="ios-hand" size="36"/>-->
-            <!--<br>-->
-            <!--漫游-->
-        <!--</div>-->
         <div class="functions">
 
             <camera-tutorial></camera-tutorial>
@@ -33,9 +27,8 @@
             <tile-coordinates></tile-coordinates>
         </div>
 
-        <div class="functions">
-            <book-mark></book-mark>
-        </div>
+
+
         <div class="functions">
 
             <simulate-fly></simulate-fly>
@@ -44,14 +37,13 @@
         <div class="functions">
             <!--缩放-->
                 <enlarge></enlarge>
-
         </div>
         <div class="functions">
             <!--缩放-->
             <scene-mode></scene-mode>
         </div>
         <div class="functions">
-            <!--缩放-->
+            <!---->
             <scene-mode></scene-mode>
         </div>
         <div class="functions">
@@ -69,10 +61,7 @@
             <br>
             自动定位
         </div>
-        <div class="functions">
 
-            <fast-locate></fast-locate>
-        </div>
         <div class="functions">
             <meature></meature>
         </div>

@@ -1,15 +1,21 @@
-<!-- model 模型 -->
+<!-- -->
 <template>
     <div class="container">
 
-        <div class="title">工作区间</div>
-        <Tabs type="card" closable>
+        <!-- 工作区-->
 
-            <TabPane v-if="tabPaneShowState.isLayerControlShow" label="图层切换" >
-                <layer-container></layer-container>
-            </TabPane>
+        <label>工作区</label>
+        <div v-if="isLayerControlShow">
+            <layer-container></layer-container>
+        </div>
+        <div v-if="isBookmarkWorkspaceShow">
+            <bookmark-container></bookmark-container>
+        </div>
+        <div v-if="isGraphicsWorkspaceShow">
+            <graphics-container></graphics-container>
+        </div>
 
-        </Tabs>
+
     </div>
 </template>
 
@@ -18,15 +24,16 @@
     import {mapActions, mapState} from 'vuex'
 
     import LayerContainer from './tabbar/LayerContainer.vue'
+    import BookmarkContainer from './tabbar/BookmarkContainer.vue'
+    import GraphicsContainer from './tabbar/GraphicsContainer.vue'
 
     export default {
         data() {
             return {
-                isLayerControlShow: true
             };
         },
         computed: {
-            ...mapState(['tabPaneShowState']),
+            ...mapState(['isLayerControlShow', 'isBookmarkWorkspaceShow','isGraphicsWorkspaceShow']),
 
         },
         created() {
@@ -38,11 +45,18 @@
                 // 获取轮播图的方法
                 const {data} = await this.$http.get("/getlunbo");
                 if (data.status === 200) this.lunbotu = data.result;
+            },
+            handleTabRemove (name) {
+                // 手动关闭的标签页
+                this['name'] = false;
+
             }
         },
         components: {
             // 注册子组件
-            LayerContainer
+            LayerContainer,
+            BookmarkContainer,
+            GraphicsContainer
 
         },
 

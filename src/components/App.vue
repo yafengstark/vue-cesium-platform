@@ -2,6 +2,7 @@
     <div class="app-container">
 
 
+        <!-- 标题栏-->
         <div class="menu">
             <Menu mode="horizontal" class="app-menu">
                 <!--<MenuItem name="0">-->
@@ -17,7 +18,7 @@
 
                     <router-link tag="span" to="/start">
                         <Icon type="ios-map" />
-                        地图
+                        开始
                     </router-link>
 
 
@@ -27,7 +28,7 @@
 
                     <router-link tag="span" to="/data">
                         <Icon type="ios-paper"/>
-                        数据
+                        插入
                     </router-link>
 
                 </MenuItem>
@@ -36,7 +37,7 @@
 
                     <router-link tag="span" to="/model">
                         <Icon type="ios-analytics" />
-                        三维数据
+                        视图
                     </router-link>
 
 
@@ -66,7 +67,7 @@
 
                     <router-link tag="span" to="/system">
                         <Icon type="ios-settings-outline"/>
-                        设置
+                        用户
                     </router-link>
 
                 </MenuItem>
@@ -82,20 +83,22 @@
                 </MenuItem>
             </Menu>
         </div>
+        <!-- 路由容器-->
         <div class="ribbon">
             <!-- 路由的容器 -->
             <transition class="app-view">
                 <router-view></router-view>
             </transition>
         </div>
-        <!-- left-->
+        <!-- 主界面-->
         <div class="center demo-split">
 
-
             <Split v-model="split1">
+                <!-- 左侧 -->
                 <div slot="left" class="demo-split-pane">
-                    <!--<tabs></tabs>-->
+                    <workspace></workspace>
                 </div>
+                <!-- 右侧 -->
                 <div slot="right" class="demo-split-pane right-pane">
                     <cesium-container></cesium-container>
                 </div>
@@ -116,13 +119,13 @@
 
     import CesiumContainer from './subcomponents/CesiumContainer.vue'
 
-    import Tabs from './Tabs.vue'
+    import Workspace from './Workspace.vue'
 
     export default {
         data() {
             return {
                 flag: true, // 默认显示返回按钮
-                split1: 0
+                split1: 0.3
             };
         },
         methods: {
@@ -159,7 +162,7 @@
         },
         components: {
             CesiumContainer,
-            Tabs
+            Workspace
         }
     };
 </script>
@@ -188,6 +191,7 @@
         }
         .ribbon {
             height: 80px;
+            background-color: #ebebeb;
         }
         .center {
             display: flex;

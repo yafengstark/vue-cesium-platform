@@ -2,9 +2,10 @@
     <div class="container">
 
 
-        <a @click="value3 = true">
-            <img src="../../common/images/book-mark.png" style="width: 32px">
-            <br>书签</a>
+        <Button @click="value3 = true">
+            <img src="../../common/images/book-mark.png" style="width: 16px">
+            <br>新建书签
+        </Button>
 
         <Drawer
                 title="书签"

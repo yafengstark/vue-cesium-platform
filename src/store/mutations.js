@@ -14,6 +14,21 @@ export default {
         state.user.username = user.username;
         state.user.token = user.token;
     },
+    setCesiumViewer(state, {Cesium, viewer}){
+        state.Cesium = Cesium;
+        state.viewer = viewer;
+    },
+    setIsLayerControlViz(state, {show}){
+        state.isLayerControlShow = show;
+    },
+    setBookmarkWorkspaceViz(state, {show}){
+        state.isBookmarkWorkspaceShow = show;
+    },
+    setGraphicsWorkspaceViz(state, {show}){
+        state.isGraphicsWorkspaceShow = show;
+    },
+
+
     /**
      * 搜索前的清除标注
      *

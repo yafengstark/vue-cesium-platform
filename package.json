@@ -37,11 +37,13 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "echarts": "^4.5.0",
     "iview": "^3.5.0-rc.1",
     "mint-ui": "^2.2.13",
     "moment": "^2.20.1",
     "vue": "^2.5.13",
     "vue-cesium": "^1.0.2",
+    "vue-echarts": "^4.1.0",
     "vue-router": "^3.0.1",
     "vue2-preview": "^1.0.1",
     "vuex": "^3.0.1"

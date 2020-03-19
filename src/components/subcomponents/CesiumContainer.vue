@@ -39,8 +39,8 @@
                 timeline: true,
                 baseLayerPicker: true,
                 fullscreenButton: true,
-                infoBox: true,
-                vrButton: true,
+                infoBox: false,
+                vrButton: false,
                 geocoder: true,
                 homeButton: true,
                 automaticallyTrackDataSourceClocks: true
@@ -65,15 +65,28 @@
 //                this.camera.position.height = 50
 //                this.animation = true
 
+                this.$store.commit('setCesiumViewer', {Cesium: Cesium, viewer: viewer});
 
-                this.$store.state.myMap.viewer = viewer;
 
-                this.$store.state.myMap.Cesium = Cesium;
+
+                // 变换位2D
+                var sceneModePickerVM = new Cesium.SceneModePickerViewModel(viewer.scene);
+                sceneModePickerVM.morphTo2D()
+
+                var lon_nantong = 120.059;
+                var lat_nantong = 32;
+                var height = 10000;
+
+                // 直接定位
+                viewer.camera.setView({
+                    destination: Cesium.Cartesian3.fromDegrees(lon_nantong, lat_nantong, height)
+                });
+
 //                初始位置
 
-                viewer.camera.flyTo({
-                    destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000000.0)
-                });
+//                viewer.camera.flyTo({
+//                    destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000000.0)
+//                });
 
 //                viewer.scene.camera = this.camera;
 

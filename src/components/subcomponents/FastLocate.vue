@@ -3,10 +3,9 @@
 
 
 
-        <a @click="value3 = true">
-            <img src="../../common/images/locate.png" style="width: 32px">
-            <br>快速跳转
-        </a>
+        <Button @click="value3 = true">
+            <img src="../../common/images/locate.png" style="width: 16px">快速跳转
+        </Button>
 
         <Drawer
                 title="位置"

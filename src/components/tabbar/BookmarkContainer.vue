@@ -2,14 +2,7 @@
     <div>
 
       <Button @click="hideIt">隐藏</Button>
-        <Card dis-hover v-for="(item, index) in layerList" :key="index">
-
-            <p>
-                名称: {{item.name}}
-            </p>
-
-            <i-switch v-model="item.show" @on-change="changeShow(item)"/>
-        </Card>
+        书签管理
 
     </div>
 </template>
@@ -51,7 +44,7 @@
 
                 console.log('点击了隐藏')
 
-                this.$store.commit('setIsLayerControlViz', {show: false});
+                this.$store.commit('setBookmarkWorkspaceViz', {show: false});
 
 
             }

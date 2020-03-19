@@ -1,15 +1,9 @@
 <template>
     <div>
 
+        <!--在线标注-->
       <Button @click="hideIt">隐藏</Button>
-        <Card dis-hover v-for="(item, index) in layerList" :key="index">
-
-            <p>
-                名称: {{item.name}}
-            </p>
-
-            <i-switch v-model="item.show" @on-change="changeShow(item)"/>
-        </Card>
+        在线标注
 
     </div>
 </template>
@@ -31,7 +25,7 @@
             };
         },
         computed: {
-            ...mapState(['isLayerControlShow']),
+            ...mapState(['isGraphicsWorkspaceShow']),
 
         },
         created() {
@@ -51,7 +45,7 @@
 
                 console.log('点击了隐藏')
 
-                this.$store.commit('setIsLayerControlViz', {show: false});
+                this.$store.commit('setGraphicsWorkspaceViz', {show: false});
 
 
             }

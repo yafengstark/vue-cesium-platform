@@ -17,6 +17,7 @@
 
         绘制：<i-switch v-model="switch1" @on-change="change" />
 
+        <!-- 传到服务器段保存 -->
         <Button @click="saveDraw">保存绘制结果</Button>
 
 
@@ -81,10 +82,6 @@
                         label: '面'
                     },
                     {
-                        value: 'multiline',
-                        label: '折线'
-                    },
-                    {
                         value: 'circle',
                         label: '圆'
                     },
@@ -105,7 +102,6 @@
         },
         computed: {
             ...mapState(['isGraphicsWorkspaceShow']),
-
         },
         created() {
             // 选择显示
@@ -121,6 +117,7 @@
                 console.log('点击了隐藏');
                 this.$store.commit('setGraphicsWorkspaceViz', {show: false});
             },
+
             change (status) {
                 this.$Message.info('开关状态：' + status);
 
@@ -132,7 +129,9 @@
 
             },
             /**
-             * 返回
+             * 不允许多点
+             *
+             *
              * @param positionData
              * @returns {Entity}
              */
@@ -142,7 +141,16 @@
                 var that = this;
 
                 var shape;
-                if (that.drawMode === 'line') {
+                if( that.drawMode === 'point'){
+                    shape = viewer.entities.add({
+                        position: positionData[0],
+                        point: {
+                            color: Cesium.Color.BLUE,
+                            pixelSize: 10,
+                        }
+                    });
+                }
+                else if (that.drawMode === 'line') {
                     shape = viewer.entities.add({
                         polyline: {
                             positions: positionData,
@@ -161,11 +169,16 @@
                 }
                 else if (that.drawMode === 'circle') {
                     //当positionData为数组时绘制最终图，如果为function则绘制动态图
+
+                    console.log("positionData.getValue: " + positionData.getValue)
+
                     var value = typeof positionData.getValue === 'function' ? positionData.getValue(0) : positionData;
-                    //var start = activeShapePoints[0];
-                    //var end = activeShapePoints[activeShapePoints.length - 1];
-                    //var r = Math.sqrt(Math.pow(start.x - end.x, 2) + Math.pow(start.y - end.y, 2));
-                    //r = r ? r : r + 1;
+                    console.log(value);
+//                    var start = that.activePositions[0];
+//                    var end = that.activePositions[that.activePositions.length - 1];
+//                    var r = Math.sqrt(Math.pow(start.x - end.x, 2) + Math.pow(start.y - end.y, 2));
+//                    r = r ? r : r + 1;
+
                     shape = viewer.entities.add({
                         position: that.activePositions[0],
                         name: 'Blue translucent, rotated, and extruded ellipse with outline',
@@ -203,19 +216,18 @@
                 return shape;
             },
 
+
             startDraw() {
+
                 var Cesium = this.$store.state.Cesium;
                 var viewer = this.$store.state.viewer;
                 var that = this;
 
-                if (this.endPositions.length > 0) {
-                    this.endPositions = [];
-                }
-                if (this.endEntity !== undefined) {
-                    console.log('清空上次绘制结果')
-                    viewer.entities.remove(this.endEntity);
-                }
+                // 正在绘制中的标注位
+                this.isDrawing = true;
 
+                // 还原数据
+                this.clearDraw();
 
 
                 // 获取事件句柄
@@ -296,6 +308,7 @@
                                 // 动态响应图形，
                                 if (that.drawMode === 'polygon') {
                                     return new Cesium.PolygonHierarchy(that.activePositions);
+                                }else if (that.drawMode === 'circle') {
                                 }
                                 return that.activePositions;
                             }, false);
@@ -320,7 +333,19 @@
                         }
                         that.activePositions.push(earthPosition);
 
-                        console.log('本次点击结束后：')
+
+                        // 只允许绘制一个点
+                        if(that.drawMode === 'point'
+                            && that.floatingPositions.length === 1){
+                            that.terminateDraw();
+                        }else if(that.drawMode === 'circle'
+                        && that.floatingPositions.length === 2){
+                            that.terminateDraw();
+                        }else if(that.drawMode === 'rectangle'
+                            && that.floatingPositions.length === 2){
+                            that.terminateDraw();
+                        }
+
 
 
                     }
@@ -347,12 +372,15 @@
 
 
             },
+            // 结束绘制
             terminateDraw() {
 
                 console.log('右键结束绘制');
                 var Cesium = this.$store.state.Cesium;
                 var viewer = this.$store.state.viewer;
                 var that = this;
+
+                this.isDrawing = false;
 
 
                 // 结束绘制时的点集
@@ -401,7 +429,6 @@
 
 
 
-
                 //
                 var handler = this.handler;
                 if(handler !== undefined){
@@ -412,6 +439,13 @@
 
             },
             stopDraw(){
+
+                this.isDrawing = false;
+
+                // 移除绘制，还原结果
+                this.clearDraw();
+
+                // 移除事件
                 var handler = this.handler;
                 if(handler !== undefined){
                     handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -470,7 +504,13 @@
             saveDraw() {
 
                 if (this.isDrawing) {
-                    console.error('请先点击结束绘制')
+                    this.$Message.error("请先结束当前绘制再保存")
+//                    console.error('请先点击结束绘制')
+                    return;
+                }
+                if(this.endPositions.length === 0){
+                    this.$Message.error("无选择点，请绘制结束后点击保存")
+//                    console.error('请先点击结束绘制')
                     return;
                 }
 
@@ -480,6 +520,9 @@
 
                 console.log('绘制结果')
                 console.log(this.endPositions.length);
+
+                this.$Message.success("保存成功")
+
 
             },
 

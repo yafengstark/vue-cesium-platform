@@ -70,8 +70,8 @@
 
 
                 // 变换位2D
-                var sceneModePickerVM = new Cesium.SceneModePickerViewModel(viewer.scene);
-                sceneModePickerVM.morphTo2D()
+//                var sceneModePickerVM = new Cesium.SceneModePickerViewModel(viewer.scene);
+//                sceneModePickerVM.morphTo2D()
 
                 var lon_nantong = 120.059;
                 var lat_nantong = 32;

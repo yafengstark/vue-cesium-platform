@@ -38,6 +38,8 @@
   "dependencies": {
     "axios": "^0.19.1",
     "iview": "^3.5.0-rc.1",
+    "jslinq": "^1.0.22",
+    "linq": "^3.2.2",
     "mint-ui": "^2.2.13",
     "moment": "^2.20.1",
     "vue": "^2.5.13",

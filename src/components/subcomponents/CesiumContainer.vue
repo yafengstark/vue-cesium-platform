@@ -8,40 +8,34 @@
                    :timeline="timeline"
                    :animation="animation">
             <vc-navigation :options="options"></vc-navigation>
-
-            <!--<vc-layer-imagery>
+            <vc-layer-imagery>
                 <vc-provider-imagery-tianditu mapStyle="img_c" :token="tk"></vc-provider-imagery-tianditu>
             </vc-layer-imagery>
+            <!--
 
-            <vc-layer-imagery>
-                <vc-provider-imagery-arcgis-mapserver :url="url"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>
+    <vc-layer-imagery>
+        <vc-provider-imagery-arcgis-mapserver :url="url"></vc-provider-imagery-arcgis-mapserver>
+    </vc-layer-imagery>
 
-            <vc-layer-imagery>
-                <vc-provider-imagery-arcgis-mapserver :url="url_city"></vc-provider-imagery-arcgis-mapserver>
-            </vc-layer-imagery>-->
-
+    <vc-layer-imagery>
+        <vc-provider-imagery-arcgis-mapserver :url="url_city"></vc-provider-imagery-arcgis-mapserver>
+    </vc-layer-imagery>-->
             <!--<vc-layer-imagery>
         <vc-provider-imagery-arcgis-mapserver :url="url_city_label"></vc-provider-imagery-arcgis-mapserver>
     </vc-layer-imagery>-->
             <!--加载geojson作为标注-->
-            <vc-datasource-geojson data="https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=fname&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=geojson"
-                                   @ready="labelLoaded"
-                                   :show="show"
-                                   :options="labelOptions">
+            <!--<vc-datasource-geojson data="https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=fname&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=geojson"
+                           @ready="labelLoaded"
+                           :show="show"
+                           :options="labelOptions">
 
-            </vc-datasource-geojson>
-
+    </vc-datasource-geojson>-->
             <!--地名点-->
             <!--<vc-datasource-geojson data="/public/zj_pn_2000.geojson"
-                           :show="showPn"
-                           :options="pnOptions">
+                   :show="showPn"
+                   :options="pnOptions">
 
-            </vc-datasource-geojson>-->
-
-
-            
-
+    </vc-datasource-geojson>-->
             <!--<vc-layer-imagery>
         <vc-provider-imagery-arcgis-mapserver :url="url_zj_img"></vc-provider-imagery-arcgis-mapserver>
     </vc-layer-imagery>-->
@@ -59,7 +53,14 @@
 </template>
 
 <script>
+    //检测两个矩形是否碰撞
+    function hitTest(x1,y1,w1,h1, x2,y2,w2,h2) {
+        
+        if (x1 > (x2 + w2) || (x1 + w1) < x2) return false;
+        if (y1 > (y2 + h2) || (y1 + h1) < y2) return false;
 
+        return true;
+    }
     export default {
         data() {
             return {
@@ -105,6 +106,7 @@
                   enableMyLocation: true
                 },
                 url: 'https://gis.zjgisdev.com/hserver/rest/services//ZJ_BOU_PRO_LN/MapServer', //arcgis 服务
+                //url:'/public/zj_pn.geojson',
                 url_city: 'https://gis.zjgisdev.com/hserver/rest/services/ZJ_BOU_CIT_LN/MapServer',
                 url_zj_img: 'https://gis.zjgisdev.com/hserver/rest/services//ZJ_IMG_FULL/MapServer',
                 url_city_label: 'https://gis.zjgisdev.com/hserver/rest/services/ZJ_RES_CIT_PT/MapServer',
@@ -263,26 +265,14 @@
             },
 
             //动态显示地名数据
-            showPlaceNames(view,cameraHeight) {
+            showPlaceNames(view, cameraHeight) {
+                //debugger;
+                
                 console.log('显示地名');
-
-                
-                
-                if (cameraHeight < 1700000) {
-                    //地市级  1700公里以内时显示地级市
-                }
-
-                if (cameraHeight < 200000) {
-                    //县区  景点公园  湖泊 水系
-                }
-
-                if (cameraHeight < 100000) {
-                    //镇
-                }
-
                 var url = 'https://gis.zjgisdev.com/hserver/rest/services/zj_pn/FeatureServer/0/query?where=fcode%3D+%273101040106%27&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=objectid%2Cname&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=geojson';
-                var url = '/public/zj_pn.geojson';
+                var url = '/public/zj_pn_2000.geojson';
                
+                var pn_object = null;
                 
                 if (view.dataSources.getByName('zj_pn').length < 1) {
 
@@ -294,22 +284,172 @@
                         queryParameters: ''
                     }).then(function (jsondata) {
 
+                        //var linq = require('linq');
+
+                        //地市
+                        //jsondata = linq.from(jsondata.features).where(p => p.properties.fcode == '3101040106').toArray();
+                        jsondata = jsondata.features;
+                
                         // Create a label collection with two labels
-                        //var labels = scene.primitives.add(new Cesium.LabelCollection());
+
+                        var labels = new Cesium.LabelCollection({
+                            debugShowBoundingVolume: false,
+                            //blendOption: BlendOption.OPAQUE
+                        });
+
+                        window.mylabels = labels;
+
+                        
+                        var text = '', id = '', coords = [];
+                        var dist_cond = new Cesium.DistanceDisplayCondition(6000, 9000);
+                        var trans_cond = new Cesium.NearFarScalar(2.5e6, 1.0, 2.5e7, 0.0);
+                        for (var i = 0; i < jsondata.length; i++) {
+                            text = jsondata[i].properties['name'];
+                            id = jsondata[i].properties['gnid'];
+                            console.log(id);
+                            coords = jsondata[i].geometry.coordinates;
+                            labels.add({
+                                id: id,
+                                position: Cesium.Cartesian3.fromDegrees(coords[0], coords[1]), 
+							    text: text, 
+							    font: '10px Helvetica', 
+							    //distanceDisplayCondition:dist_cond,
+                                fillColor: Cesium.Color.RED,
+                                backgroundColor: Cesium.Color.BLUE,
+							    outlineColor: Cesium.Color.BLACK, 
+							    outlineWidth: 5, 
+							    //pixelOffset : new Cartesian3(50.0, -50.0), 
+                                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                                //translucencyByDistance: trans_cond
+						    }); 
+                        }
+
+                        view.scene.primitives.add(labels);
+                        
+
+                        console.log('缓存所有的地名信息');
+
                         ds.jsondata = jsondata;
-                        debugger;
+
+                        pn_object = jsondata;
+
+                        //debugger;
                     }).otherwise(function (error) {
                         // an error occurred
+                        debugger;
                     });
 
-                  
-							
-																	
-
-                    
+                } else {
+                    pn_object = view.dataSources.getByName('zj_pn')[0].jsondata;
                 }
+
+                //debugger;
+                var test = window.mylabels;
+                if (window.mylabels && window.mylabels.length > 0) {
+                    this.processLabels(view, window.mylabels);
+                    
+
+                }
+
+
+
+
+                if (cameraHeight < 1700000) {
+                    //地市级  1700公里以内时显示地级市
+                    
+                    Cesium.Resource.fetchJson({
+                        //url: 'https://gis.zjgisdev.com/hserver/rest/services/zj_pn/FeatureServer/0/query?where=fcode%3D+%273101040106%27&spatialRel=esriSpatialRelIntersects&distance=&outFields=name%2Cgnid&returnGeometry=true&featureEncoding=esriDefault&f=geojson',
+                        url: 'https://gis.zjgisdev.com/hserver/rest/services/zj_pn/FeatureServer/0/query',
+                        queryParameters: {
+                            'where': "fcode='3101040106'",
+                            'outFields': 'name,gnid',
+                            'f': 'geojson'
+                        }
+                    }).then(function (jsondata) {
+                        debugger;
+                    });
+                }
+
+                if (cameraHeight < 200000) {
+                    //县区  景点公园  湖泊 水系
+                }
+
+                if (cameraHeight < 100000) {
+                    //镇
+                }
+
+                
+                
+                
                 
 
+            },
+
+            hitTest(label1, label2,scene) {
+                var w1 = 0;
+                var h1 = 0;
+                var pos1 = label1.computeScreenSpacePosition(scene);
+                var x1 = pos1.x;
+                var y1 = pos1.y;
+
+                //一个字一个glyph
+                for (var i = 0; i < label1._glyphs.length; i++) {
+                    w1 += label1._glyphs[i].dimensions.width;
+                    //h1 += label1._glyphs[i].dimensions.height;
+                    h1 = label1._glyphs[i].dimensions.height > h1 ? label1._glyphs[i].dimensions.height : h1;
+                }
+
+                w1 *= label1.totalScale;
+                h1 *= label1.totalScale;
+
+                var w2 = 0;
+                var h2 = 0;
+
+                for (var i = 0; i < label2._glyphs.length; i++) {
+                    w2 += label2._glyphs[i].dimensions.width;
+                    h2 = label2._glyphs[i].dimensions.height > h2 ? label2._glyphs[i].dimensions.height : h2;
+                }
+
+                w2 *= label2.totalScale;
+                h2 *= label2.totalScale;
+
+                var pos2 = label2.computeScreenSpacePosition(scene);
+                var x2 = pos2.x;
+                var y2 = pos2.y;
+
+                console.log(label1.text + ' ' + x1 + ' ' + y1 + 'w:' + w1 + '  h:' + h1);
+
+                return hitTest(x1, y1, w1, h1, x2, y2, w2, h2);
+
+
+            },
+
+            //标注避让处理，将有重叠的标注隐藏
+            processLabels(view, labels) {
+
+                //先全部重置为显示
+                for (var i = 0; i < labels.length; i++) {
+                    labels.get(i).show = true;
+                }
+
+                var lbl1, lbl2;
+                for (var i = 0; i < labels.length; i++) {
+
+                    lbl1 = labels.get(i);
+
+                    if (!lbl1.show) continue;
+
+                    for (var j = i + 1; j < labels.length; j++) {
+                        lbl2 = labels.get(j);
+                        if (this.hitTest(lbl1, lbl2, view.scene)) {
+                            lbl2.show = false; //隐藏
+                            //break;
+                        }
+                    }
+
+                    
+
+                }
             }
         },
         components: {

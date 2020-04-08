@@ -27,6 +27,7 @@ module.exports = {
       // 如果指定了 limit 参数，则只有图片的大小，小于给定的 值时候，才会转为base64格式的图片；否则，就不转换；
       { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }, // 添加转换JS文件的loader，其中，必须把 node_modules 目录设置为 排除项，这样，在打包的时候，会忽略node_modules 目录下的所有JS文件；否则项目运行不起来！
       { test: /\.vue$/, use: 'vue-loader' }, // 解析Vue组件的第三方loader
+	  { test: /\.geojson$/, use: 'vue-loader' }, // 解析Vue组件的第三方loader
       { test: /\.ttf|woff|woff2|eot|svg$/, use: 'url-loader' }, // 处理 样式中字体文件路径的问题
     ]
   },
